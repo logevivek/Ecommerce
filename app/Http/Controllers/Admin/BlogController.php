@@ -10,7 +10,7 @@ use App\Http\Controllers\Controller;
 class BlogController extends Controller
 {
     public function ShowBlogs(){
-
+        // vbsdmbhfsj
         $blogs_data= Blog::orderBy('id', 'desc')
         ->where('trash',0)
         ->get();
