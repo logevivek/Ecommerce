@@ -10,7 +10,7 @@ use App\Models\Category;
 class CategoryController extends Controller
 {
     public function ProductCategory(){
-      
+      ///hsdghsdhsdhghsdghsdhsdhd
         $categories = Category::orderBy('id', 'desc')
         ->where('trash',0)
         ->get();
