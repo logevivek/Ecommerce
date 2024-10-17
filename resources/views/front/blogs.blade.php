@@ -95,6 +95,3 @@ p {
 
 @endsection
 
-@section('title')
-Blog Page
-@endsection

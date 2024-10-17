@@ -65,7 +65,7 @@
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="{{ url('/product') }}" class="nav-link {{ request()->is('product') ? 'active' : '' }}">
+                            <a href="{{ url('/product') }}" class="nav-link {{ request()->is('product', 'editProduct') ? 'active' : '' }}">
                             <i class="far fa-circle nav-icon"></i>
                             <p>Show Products</p>
                         </a>
@@ -112,7 +112,7 @@
                     <li class="nav-item">
                         <a href="{{ url('/website') }}" class="nav-link {{ request()->is('website', 'editwebsite') ? 'active' : '' }}">
                             <i class="far fa-circle nav-icon"></i>
-                            <p>Manage Website</p>
+                            <p>Customize Website</p>
                         </a>
                     </li>
                     <li class="nav-item">

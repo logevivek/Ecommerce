@@ -32,24 +32,23 @@ $(document).ready(function() {
                 validImage: true,
                 catfileSize: true 
             },
-
-            meta_title: {
-                required: true,
-                minlength: 5,
-                maxlength: 60
-            },
-            meta_description: {
-                required: true,
-                minlength: 100,
-                maxlength: 160
-            },
+            // meta_title: {
+            //     required: true,
+            //     minlength: 30,
+            //     maxlength: 60
+            // },
+            // meta_description: {
+            //     required: true,
+            //     minlength: 100,
+            //     maxlength: 160
+            // },
        
-            focus_keyword: {
-                required: true,
-            },
-            tags: {
-                required: true,
-            },
+            // focus_keyword: {
+            //     required: true,
+            // },
+            // tags: {
+            //     required: true,
+            // },
         },
         messages: {
             name: {
@@ -72,7 +71,7 @@ $(document).ready(function() {
 
             meta_title: {
                 required: "Please enter category meta title.",
-                minlength: "Your meta title must be at least 5 characters long.",
+                minlength: "Your meta title must be at least 30 characters long.",
                 maxlength: "Your meta title must be less than 60 characters."
             },
 
@@ -107,274 +106,116 @@ $(document).ready(function() {
 });
 
 
-// Product Form  Validation 
-$(document).ready(function() {
-    // Custom validation method for image file types
-    $.validator.addMethod("validImage", function(value, element) {
-        return this.optional(element) || /\.(jpg|jpeg|png)$/i.test(value);
-    }, "Please upload a valid image file (jpg, jpeg, png).");
-
-     // Custom validation method for image size between 20KB and 80KB
-    $.validator.addMethod("profileSize", function(value, element) {
-        if (element.files.length === 0) return true;
-        var profileSize = element.files[0].size;
-        return profileSize >= 10240 && profileSize <= 81920;// Size in bytes
-    }, "Please upload an image between 10KB and 80KB.");
-
-    $("#pro_price").on("keyup", function(){
-        var valid = /^\d{0,6}(\.\d{0,4})?$/.test(this.value),
-            val = this.value;
-        
-        if(!valid){
-            console.log("Invalid input!");
-            this.value = val.substring(0, val.length - 1);
-        }
-    });
-
-    $("#pro_quantity").on("keyup", function(){
-        var valid = /^\d{0,2}(\.\d{0,2})?$/.test(this.value),
-            val = this.value;
-        
-        if(!valid){
-            console.log("Invalid input!");
-            this.value = val.substring(0, val.length - 1);
-        }
-    });
-    // Validate the form
-    $("#proForm").validate({
-     
-        rules: {
-            pro_name: {
-                required: true,
-                minlength: 5,
-                maxlength: 30
-            },
-            cat_id: {
-                required: true,
-            },
-            pro_price:{
-                required: true,
-                minlength: 0.01,
-                maxlength: 9999.99
-            },
-
-            pro_quantity:{
-                required: true,
-                minlength: 1,
-                maxlength: 100
-            },
-            pro_desc: {
-                required: true,
-                minlength: 30,
-                maxlength: 200
-            },
-
-            pro_img: {
-                required: true,
-                validImage: true,
-                profileSize: true 
-            },
-
-            meta_title: {
-                required: true,
-                minlength: 5,
-                maxlength: 60
-            },
-
-            meta_description: 
-            {
-                required: true,
-                minlength: 100,
-                maxlength: 160
-            },
-
-            focus_keyword:{
-                required: "Please enter focus keyword.",
-            },
-
-            tags:{
-                required: "Please add tags.", 
-            }
-       
-        },
-        messages: {
-            pro_name: {
-                required: "Please enter product name.",
-                minlength: "Your product name must be at least 5 characters long.",
-                maxlength: "Your product  name must be less than 30 characters."
-            },
-            cat_id: {
-                required: "Please select product category.",
-            },
-     
-            pro_price: {
-                required: "Please enter product price.",
-                minlength: "Your product price must be at least 0.01.",
-                maxlength: "Your product  price must be less than 9999."
-            },
-     
-            pro_quantity: {
-                required: "Please enter product quantity.",
-                minlength: "Your product quantity must be at least 1.",
-                maxlength: "Your product  quantity must be less than 100."
-            },
-            pro_desc: {
-                required: "Please enter category description.",
-                minlength: "Your description must be at least 30 characters long.",
-                maxlength: "Your description must be less than 200 characters."
-            },
-     
-            pro_img: {
-                required: "Please upload an image.",
-                validImage:"Please upload a valid image file (jpg, jpeg, png).",
-                profileSize: "Image size must be between 20KB and 80KB."
-            },
-
-            
-            meta_title: {
-                required: "Please enter product meta title.",
-                minlength: "Your meta title must be at least 5 characters long.",
-                maxlength: "Your meta title must be less than 60 characters."
-            },
-
-            meta_description: {
-                required: "Please enter product meta description.",
-                minlength: "Your meta description must be at least 100 characters long.",
-                maxlength: "Your meta description must be less than 160 characters."
-            },
-
-            focus_keyword:{
-                required: "Please enter focus keyword.",
-
-            },
-
-            tags:{
-                required: "Please add tags.",
-                
-            }
-        },
-        errorPlacement: function(error, element) {
-            error.insertAfter(element);
-        },
-        highlight: function(element, errorClass, validClass) {
-            $(element).addClass(errorClass).removeClass(validClass);
-        },
-        unhighlight: function(element, errorClass, validClass) {
-            $(element).removeClass(errorClass).addClass(validClass);
-        },
-       
-    });
-});
 
 // Blog Form Validation
-$(document).ready(function() {
-    // Custom validation method for image file types
-    $.validator.addMethod("validImage", function(value, element) {
-        return this.optional(element) || /\.(jpg|jpeg|png)$/i.test(value);
-    }, "Please upload a valid image file (jpg, jpeg, png).");
+// $(document).ready(function() {
+//     // Custom validation method for image file types
+//     $.validator.addMethod("validImage", function(value, element) {
+//         return this.optional(element) || /\.(jpg|jpeg|png)$/i.test(value);
+//     }, "Please upload a valid image file (jpg, jpeg, png).");
 
-     // Custom validation method for image size between 20KB and 80KB
-    $.validator.addMethod("blogfileSize", function(value, element) {
-        if (element.files.length === 0) return true;
-        var blogfileSize = element.files[0].size;
-        return blogfileSize >= 10240 && blogfileSize <= 81920;// Size in bytes
-    }, "Please upload an image between 10KB and 80KB.");
+//      // Custom validation method for image size between 20KB and 80KB
+//     $.validator.addMethod("blogfileSize", function(value, element) {
+//         if (element.files.length === 0) return true;
+//         var blogfileSize = element.files[0].size;
+//         return blogfileSize >= 10240 && blogfileSize <= 81920;// Size in bytes
+//     }, "Please upload an image between 10KB and 80KB.");
 
-    // Validate the form
-    $("#blogForm").validate({
-        rules: {
-            title: {
-                required: true,
-                minlength: 5,
-                maxlength: 10
-            },
+//     // Validate the form
+//     $("#blogForm").validate({
+//         rules: {
+//             title: {
+//                 required: true,
+//                 minlength: 5,
+//                 maxlength: 10
+//             },
 
-            heading: {
-                required: true,
-                minlength: 10,
-                maxlength: 15
-            },
+//             heading: {
+//                 required: true,
+//                 minlength: 10,
+//                 maxlength: 15
+//             },
 
-            blog_desc: {
-                required: true,
-                minlength: 30,
-                maxlength: 200
-            },
+//             blog_desc: {
+//                 required: true,
+//                 minlength: 30,
+//                 maxlength: 200
+//             },
 
-            blog_banner: {
-                required: true,
-                validImage: true,
-                blogfileSize: true 
-            },
-            meta_title: {
-                required: true,
-                minlength: 5,
-                maxlength: 60
-            },
-            meta_description: {
-                required: true,
-                minlength: 100,
-                maxlength: 160
-            },
-            tags: {
-                required: true,
-            },
-        },
-        messages: {
-            title: {
-                required: "Please enter blog title name.",
-                minlength: "Your blog title name must be at least 5 characters long.",
-                maxlength: "Your blog title name must be less than 10 characters."
-            },
+//             blog_banner: {
+//                 required: true,
+//                 validImage: true,
+//                 blogfileSize: true 
+//             },
+//             meta_title: {
+//                 required: true,
+//                 minlength: 30,
+//                 maxlength: 60
+//             },
+//             meta_description: {
+//                 required: true,
+//                 minlength: 100,
+//                 maxlength: 160
+//             },
+//             tags: {
+//                 required: true,
+//             },
+//         },
+//         messages: {
+//             title: {
+//                 required: "Please enter blog title name.",
+//                 minlength: "Your blog title name must be at least 5 characters long.",
+//                 maxlength: "Your blog title name must be less than 10 characters."
+//             },
 
-            heading: {
-                required: "Please enter blog heading.",
-                minlength: "Your blog heading must be at least 10 characters long.",
-                maxlength: "Your blog heading must be less than 15 characters."
-            },
+//             heading: {
+//                 required: "Please enter blog heading.",
+//                 minlength: "Your blog heading must be at least 10 characters long.",
+//                 maxlength: "Your blog heading must be less than 15 characters."
+//             },
      
-            blog_desc: {
-                required: "Please enter description.",
-                minlength: "Your description must be at least 30 characters long.",
-                maxlength: "Your description must be less than 200 characters."
-            },
+//             blog_desc: {
+//                 required: "Please enter description.",
+//                 minlength: "Your description must be at least 30 characters long.",
+//                 maxlength: "Your description must be less than 200 characters."
+//             },
      
-            blog_banner: {
-                required: "Please upload an image.",
-                validImage: "Please upload a valid image file (jpg, jpeg, png).",
-                blogfileSize: "Image size must be between 10KB and 80KB."
-            },
+//             blog_banner: {
+//                 required: "Please upload an image.",
+//                 validImage: "Please upload a valid image file (jpg, jpeg, png).",
+//                 blogfileSize: "Image size must be between 10KB and 80KB."
+//             },
 
-            meta_title: {
-                required: "Please enter meta title.",
-                minlength: "Your meta title must be at least 5 characters long.",
-                maxlength: "Your meta title must be less than 60 characters."
-            },
+//             meta_title: {
+//                 required: "Please enter meta title.",
+//                 minlength: "Your meta title must be at least 30 characters long.",
+//                 maxlength: "Your meta title must be less than 60 characters."
+//             },
 
-            meta_description: {
-                required: "Please enter meta description.",
-                minlength: "Your meta description must be at least 100 characters long.",
-                maxlength: "Your meta description must be less than 160 characters."
-            },
+//             meta_description: {
+//                 required: "Please enter meta description.",
+//                 minlength: "Your meta description must be at least 100 characters long.",
+//                 maxlength: "Your meta description must be less than 160 characters."
+//             },
 
-            tags:{
-                required: "Please add tags.",
+//             tags:{
+//                 required: "Please add tags.",
                 
-            }
+//             }
 
-        },
-        errorPlacement: function(error, element) {
-            error.insertAfter(element);
-        },
-        highlight: function(element, errorClass, validClass) {
-            $(element).addClass(errorClass).removeClass(validClass);
-        },
-        unhighlight: function(element, errorClass, validClass) {
-            $(element).removeClass(errorClass).addClass(validClass);
-        },
+//         },
+//         errorPlacement: function(error, element) {
+//             error.insertAfter(element);
+//         },
+//         highlight: function(element, errorClass, validClass) {
+//             $(element).addClass(errorClass).removeClass(validClass);
+//         },
+//         unhighlight: function(element, errorClass, validClass) {
+//             $(element).removeClass(errorClass).addClass(validClass);
+//         },
        
-    });
-});
+//     });
+// });
 
 
 
@@ -529,8 +370,8 @@ $(document).ready(function() {
             },
             meta_title: {
                 required: true,
-                minlength: 5,
-                maxlength: 20
+                minlength: 30,
+                maxlength: 60
             },
             meta_description: {
                 required: true,
@@ -566,8 +407,8 @@ $(document).ready(function() {
 
             meta_title: {
                 required: "Please enter page meta title.",
-                minlength: "Your meta title must be at least 5 characters long.",
-                maxlength: "Your meta title must be less than 20 characters."
+                minlength: "Your meta title must be at least 30 characters long.",
+                maxlength: "Your meta title must be less than 60 characters."
             },
 
             meta_description: {
@@ -601,39 +442,197 @@ $(document).ready(function() {
 });
 
 
+// Product Form  Validation 
+$(document).ready(function() {
+    // Custom validation method for image file types
+    $.validator.addMethod("validImage", function(value, element) {
+        return this.optional(element) || /\.(jpg|jpeg|png)$/i.test(value);
+    }, "Please upload a valid image file (jpg, jpeg, png).");
+
+     // Custom validation method for image size between 20KB and 80KB
+    $.validator.addMethod("profileSize", function(value, element) {
+        if (element.files.length === 0) return true;
+        var profileSize = element.files[0].size;
+        return profileSize >= 10240 && profileSize <= 81920;// Size in bytes
+    }, "Please upload an image between 10KB and 80KB.");
+
+    $("#pro_price").on("keyup", function(){
+        var valid = /^\d{0,6}(\.\d{0,4})?$/.test(this.value),
+            val = this.value;
+        
+        if(!valid){
+            console.log("Invalid input!");
+            this.value = val.substring(0, val.length - 1);
+        }
+    });
+
+    $("#pro_quantity").on("keyup", function(){
+        var valid = /^\d{0,2}(\.\d{0,2})?$/.test(this.value),
+            val = this.value;
+        
+        if(!valid){
+            console.log("Invalid input!");
+            this.value = val.substring(0, val.length - 1);
+        }
+    });
+    // Validate the form
+    $("#ProductForm").validate({
+     
+        rules: {
+            pro_name: {
+                required: true,
+                minlength: 5,
+                maxlength: 30
+            },
+            cat_id: {
+                required: true,
+            },
+            pro_price:{
+                required: true,
+                minlength: 0.01,
+                maxlength: 9999.99
+            },
+
+            pro_quantity:{
+                required: true,
+                minlength: 1,
+                maxlength: 100
+            },
+            pro_desc: {
+                required: true,
+                minlength: 30,
+                maxlength: 200
+            },
+
+            pro_img: {
+                required: true,
+                validImage: true,
+                profileSize: true 
+            },
+
+            meta_title: {
+                required: "Please enter product meta title.",
+                minlength: "Your meta title must be at least 30 characters long.",
+                maxlength: "Your meta title must be less than 60 characters."
+            },
+
+            meta_description: {
+                required: "Please enter product meta description.",
+                minlength: "Your meta description must be at least 100 characters long.",
+                maxlength: "Your meta description must be less than 160 characters."
+            },
+
+            focus_keyword:{
+                required: "Please enter focus keyword.",
+            },
+
+            tags:{
+                required: "Please add tags.", 
+            }
+       
+        },
+        messages: {
+            pro_name: {
+                required: "Please enter product name.",
+                minlength: "Your product name must be at least 5 characters long.",
+                maxlength: "Your product  name must be less than 30 characters."
+            },
+            cat_id: {
+                required: "Please select product category.",
+            },
+     
+            pro_price: {
+                required: "Please enter product price.",
+                minlength: "Your product price must be at least 0.01.",
+                maxlength: "Your product  price must be less than 9999."
+            },
+     
+            pro_quantity: {
+                required: "Please enter product quantity.",
+                minlength: "Your product quantity must be at least 1.",
+                maxlength: "Your product  quantity must be less than 100."
+            },
+            pro_desc: {
+                required: "Please enter category description.",
+                minlength: "Your description must be at least 30 characters long.",
+                maxlength: "Your description must be less than 200 characters."
+            },
+     
+            pro_img: {
+                required: "Please upload an image.",
+                validImage:"Please upload a valid image file (jpg, jpeg, png).",
+                profileSize: "Image size must be between 20KB and 80KB."
+            },
+
+            
+            meta_title: {
+                required: "Please enter product meta title.",
+                minlength: "Your meta title must be at least 30 characters long.",
+                maxlength: "Your meta title must be less than 60 characters."
+            },
+
+            meta_description: {
+                required: "Please enter product meta description.",
+                minlength: "Your meta description must be at least 100 characters long.",
+                maxlength: "Your meta description must be less than 160 characters."
+            },
+
+            focus_keyword:{
+                required: "Please enter focus keyword.",
+
+            },
+
+            tags:{
+                required: "Please add tags.",
+                
+            }
+        },
+        errorPlacement: function(error, element) {
+            error.insertAfter(element);
+        },
+        highlight: function(element, errorClass, validClass) {
+            $(element).addClass(errorClass).removeClass(validClass);
+        },
+        unhighlight: function(element, errorClass, validClass) {
+            $(element).removeClass(errorClass).addClass(validClass);
+        },
+       
+    });
+});
+
 
 // Category Image Preview Code
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-                reader.onload = function (e) {
-                    $('#imagepreview').prop('src', e.target.result).show();
-                    $('#cancel').show(); 
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
+function readURL(input) {
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            $('#imagepreview').prop('src', e.target.result).show();
+            $('#cancel').show(); 
         }
+        reader.readAsDataURL(input.files[0]);
+     }
+    }
 
-        $("#cat_img").change(function () {
-            readURL(this);
-        });
+$("#cat_img").change(function () {
+    readURL(this);
+});
 
-        $("#cat_img").click(function () {
-            $('#imagepreview').attr('src', "backend/images/dammy.png");
-            $('#cancel').hide(); 
-        });
+$("#cat_img").click(function () {
+    $('#imagepreview').attr('src', '');
+    $('#cancel').hide(); 
+});
 
-        $('#imagepreview').click(function() {
-            $('#cat_img').replaceWith($('#cat_img').clone(true));
-            $('#imagepreview').hide();
-            $('#cancel').hide(); 
-        });
+$('#imagepreview').click(function() {
+    $('#cat_img').replaceWith($('#cat_img').clone(true));
+    $('#imagepreview').hide();
+    $('#cancel').hide(); 
+});
 
-        $('#cancel').click(function(e) {
-            $('#cat_img').val("");
-            $('#imagepreview').attr("src", "backend/images/dammy.png");
-            $(this).hide(); 
-        })
+$('#cancel').click(function(e) {
+    $('#cat_img').val("");
+    $('#imagepreview').attr("src", "images/dammy.png");
+    $(this).hide(); 
+})
 // Category Image Preview Code
 
 function readURLblog(inputblog) {
@@ -652,7 +651,7 @@ $("#blog_banner").change(function () {
 });
 
 $("#blog_banner").click(function () {
-    $('#blogpreview').attr('src', "backend/images/dammy.png");
+    $('#blogpreview').attr('src', '');
     $('#blog_cancel').hide(); 
 });
 
@@ -664,7 +663,7 @@ $('#blogpreview').click(function() {
 
 $('#blog_cancel').click(function(e) {
     $('#blog_banner').val("");
-    $('#blogpreview').attr("src", "backend/images/dammy.png");
+    $('#blogpreview').attr("src", "images/blog.jpg");
     $(this).hide(); 
 })
 
@@ -686,7 +685,7 @@ $("#banner_img").change(function () {
 });
 
 $("#banner_img").click(function () {
-    $('#bannerpreview').attr('src', "backend/images/dammy.png");
+    $('#bannerpreview').attr('src', '');
     $('#c_banner').hide(); 
 });
 
@@ -698,7 +697,7 @@ $('#bannerpreview').click(function() {
 
 $('#c_banner').click(function(e) {
     $('#banner_img').val("");
-    $('#bannerpreview').attr("src", "backend/images/dammy.png");
+    $('#bannerpreview').attr("src", "images/banner.jpg");
     $(this).hide(); 
 })
 // Banner Image Preview Code
@@ -720,7 +719,7 @@ $("#web_logo").change(function () {
 });
 
 $("#web_logo").click(function () {
-    $('#webpreview').attr('src', "backend/images/dammy.png");
+    $('#webpreview').attr('src', '');
     $('#cancelweb').hide(); 
 });
 
@@ -732,11 +731,13 @@ $('#webpreview').click(function() {
 
 $('#cancelweb').click(function(e) {
     $('#web_logo').val("");
-    $('#webpreview').attr("src", "backend/images/dammy.png");
+    $('#webpreview').attr("src", "images/dammy.png");
     $(this).hide(); 
 })
 
 // weblogo Preview 
+
+
 
 // Product Image Preview Code
 function readURL1(input1) {
@@ -755,7 +756,7 @@ $("#pro_img").change(function () {
 });
 
 $("#pro_img").click(function () {
-    $('#pro_imgpreview').attr('src', "backend/images/dammy.png");
+    $('#pro_imgpreview').attr('src', '');
     $('#cancel2').hide(); 
 });
 
@@ -767,13 +768,13 @@ $('#pro_imgpreview').click(function() {
 
 $('#cancel2').click(function(e) {
     $('#pro_img').val("");
-    $('#pro_imgpreview').attr("src", "backend/images/dammy.png");
+    $('#pro_imgpreview').attr("src", "images/dammy.png");
     $(this).hide(); 
 })
 // Category Image Preview Code
 
 //Active/Deactive category Button  code
-        $(function(){ 
+  $(function() { 
           $('.toggle-category').change(function() { 
           var status = $(this).prop('checked') == true ? 1 : 0;  
           var category_id = $(this).data('id');  
@@ -796,6 +797,7 @@ $('#cancel2').click(function(e) {
         var status = $(this).prop('checked') == true ? 1 : 0;  
         var product_id = $(this).data('id');  
         $.ajax({ 
+ 
             type: "GET", 
             dataType: "json", 
             url: '/changeProStatus', 
@@ -867,6 +869,14 @@ $(document).ready(function() {
 });
 
 
+    //toastr
+    // toastr.options = {
+    //     "closeButton": true,
+    //     "progressBar": true,
+    //     "positionClass": "toast-top-right",
+    //     "timeOut": "5000",
+    // };
+
 // Delete Category Confirm Alert 
    function confirmDelete(id) {
     swal({
@@ -935,27 +945,6 @@ $(document).ready(function() {
     });
 }
 
-// Logout Confirm Alert
-function confirmLogout() {
-    swal({
-        title: "Are you sure ?",
-        text: "You want to log out ?",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#DD6B55",
-        confirmButtonText: "Yes, log out!",
-        cancelButtonText: "No, cancel!",
-        closeOnConfirm: false,
-        closeOnCancel: false
-    }, function(isConfirm) {
-        if (isConfirm) {
-            // Redirect to logout URL
-            window.location.href = '/logout'; // Change to your actual logout URL
-        } else {
-            swal("Cancelled", "You are still logged in :)", "error");
-        }
-    });
-}
  
 // databale
  $(function () {
@@ -974,5 +963,25 @@ function confirmLogout() {
     });
   });
 
-
+// Logout Confirm Alert
+  function confirmLogout() {
+    swal({
+        title: "Are you sure?",
+        text: "You want to log out?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, log out!",
+        cancelButtonText: "No, cancel!",
+        closeOnConfirm: false,
+        closeOnCancel: false
+    }, function(isConfirm) {
+        if (isConfirm) {
+            // Redirect to logout URL
+            window.location.href = '/logout'; // Change to your actual logout URL
+        } else {
+            swal("Cancelled", "You are still logged in :)", "error");
+        }
+    });
+}
 

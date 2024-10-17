@@ -27,7 +27,7 @@
                         <a href="/product" class="btn btn-danger float-right" >Back</a>
                     </div>
                     <div class="card-body">
-                        <form action="/storeproduct" method="post" id="ProductForm" enctype="multipart/form-data">
+                        <form action="/storeproduct" method="post" id="proForm" enctype="multipart/form-data">
                             @csrf
                             <fieldset class="border p-3 rounded">
                                 <legend class="w-auto px-2"><strong>Products Details</strong></legend>
@@ -107,7 +107,7 @@
 
                                 <div class="col-md-4">
                                     <label>Tags <span style="color: red;">*</span></label>
-                                    <input type="text" name="tags"  class="form-control" value="{{ old ('tags') }}" id="click">
+                                    <input type="text" name="tags"  class="form-control" value="{{ old ('tags') }}" id="tags">
                                     @error('tags') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
                             </div>
@@ -141,7 +141,7 @@
 <script>
     var input = document.querySelector('input[name=tags]');
     var tagify = new Tagify(input);
-    $("#click").on("click", function() {
+    $("#tags").on("click", function() {
       var tags = [];
       tagify.addTags(tags);
     })

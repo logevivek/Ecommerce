@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\User;
 
+use App\Models\Page;
 use App\Models\Banner;
 use App\Models\Product;
 use App\Models\Website;
@@ -30,8 +31,9 @@ class ShopPageController extends Controller
     
         $pro_data = $query->get();
         $totalProducts = $pro_data->count();
+        $meta_data=Page::where('meta_title','Shop Page')->first();
     
-        return view('front.shop', compact('category_data', 'pro_data', 'web_data', 'banner_data', 'totalProducts'));
+        return view('front.shop', compact('category_data', 'pro_data', 'web_data', 'banner_data', 'totalProducts','meta_data'));
     }
     
 

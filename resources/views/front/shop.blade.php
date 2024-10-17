@@ -124,17 +124,6 @@
             <div class="col-lg-9 col-md-7">
                 <div class="filter__item">
                     <div class="row">
-                        <div class="col-lg-4 col-md-5">
-                            <select>
-                                <option value="-1" selected>DEFAULT SHORTING</option>
-                                <option value="1">Date, New To Old</option>
-                                <option value="2">Date, Old To New</option>
-                                <option value="3">Price, Low To Highy</option>
-                                <option value="4">Price, Highy To Low</option>
-                            </select>
-                        </div>
-
-
                         <div class="col-lg-4 col-md-4">
                             <div class="filter__found">
                                 <h6><span>Total {{$totalProducts}}</span> Products found</h6>
@@ -170,11 +159,10 @@
         </div>
     </div>
 </section>
-@endsection
 
-{{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script> --}}
-{{-- <script type="text/javascript">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script type="text/javascript">
     $(function() {
         // Set min and max from the request if available, otherwise default
         var minPrice = {{ request('min_price', 50) }};
@@ -194,8 +182,14 @@
         $("#minamount").val($(".price-range").slider("values", 0));
         $("#maxamount").val($(".price-range").slider("values", 1));
     });
-</script> --}}
+</script>
+
+@endsection
 
 @section('title')
 Shop Page
 @endsection
+
+
+
+

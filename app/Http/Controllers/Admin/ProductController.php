@@ -27,14 +27,18 @@ class ProductController extends Controller
         return view('backend.addproduct', compact('data'));
     }
 
-    public function storeProduct( Request $request){
+    public function storeProduct( Request $request)
+    
+    {
+        if( $jsonString=$request->tags){
+            $array = json_decode($jsonString, true);
+            $tags_values = array_column($array, 'value');
+            $tags_data = implode(", ", $tags_values);
+        }
 
-        $jsonString=$request->tags;
-        $array = json_decode($jsonString, true);
-        $tags_values = array_column($array, 'value');
-        $tags_data = implode(", ", $tags_values);
-
+ 
         //dd($tags_data); 
+
        $request->validate([
         'pro_name' => 'required|regex:/([A-Za-z0-9 ])+/|string|unique:products|max:30',
         'pro_desc' => 'required',
@@ -42,7 +46,7 @@ class ProductController extends Controller
         'pro_quantity' => 'required|integer|min:1|max:100',
         'cat_id' => 'required|numeric',
         'pro_img' => 'required|mimes:jpeg,png,jpg|max:81920',
-        'meta_title'=>'required|string|min:30|max:60',
+        'meta_title'=>'required|string|min:5|max:60',
         'meta_description'=>'required|string|min:100|max:160',
         'focus_keyword'=>'required|string',
         'tags'=>'required|unique:products',
@@ -114,17 +118,19 @@ class ProductController extends Controller
         ->join('category', 'products.cat_id', '=', 'category.id')
         ->select('products.*', 'category.name')->where('products.id',$id)
         ->first();
-        return view('backend.editProduct' , ['product' => $product], compact('data'));
+        return view('backend.editProduct', compact('data','product'));
      }
     
 
   // Update Product Details
   public function updateProduct(Request $request)
   {
-      $id = $request->query('id');
+    //$id = $request->query('id');
+        $id = $request->id;
+   
       // Validate the request data
       $request->validate([
-        'meta_title'=>'required|string|min:30|max:60',
+        'meta_title'=>'required|string|min:5|max:60',
         'meta_description'=>'required|string|min:100|max:160',
         'focus_keyword'=>'required|string',
         'tags'=>'required|unique:products',

@@ -55,8 +55,8 @@
                                 <td>{{ $blog_values->heading }}</td>
                                 <td>{{ $blog_values->blog_desc }}</td>
                                 <td><img src="backend/images/{{ $blog_values->blog_banner }}" width="150px" height="150px"/></td>
-                                <td>
-                                  <a href="/editbolgs?id={{ $blog_values->id }}" class="btn btn-success" title="Update record"> <i class="fa fa-edit"></i></a>
+                                <td class="text-center d-flex">
+                                  <a href="/editbolgs?id={{ $blog_values->id }}" class="btn btn-success" title="Update record"> <i class="fa fa-edit"></i></a>&nbsp;
                                   <a href="javascript:void(0)" class="btn btn-danger" title="Delete record" onclick="confirmBlogDelete({{ $blog_values->id }})">
                                     <i class="fa fa-trash"></i>
                                 </a>

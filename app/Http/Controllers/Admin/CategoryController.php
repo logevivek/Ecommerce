@@ -29,17 +29,17 @@ class CategoryController extends Controller
 
     {
         // Decode tags data
-        $jsonString=$request->tags;
+     if( $jsonString=$request->tags){
         $array = json_decode($jsonString, true);
         $tags_values = array_column($array, 'value');
         $tags_data = implode(", ", $tags_values);
-
+        }
         //dd($tags_data); 
         $request->validate([
             'name' => 'required|string|unique:category|max:100',
-            'description' => 'required',
-            'cat_img' => 'required|mimes:jpeg,png,jpg|max:81920',
-            'meta_title'=>'required|string|min:30|max:60',
+            'description'=> 'required',
+            'cat_img'=> 'required|mimes:jpeg,png,jpg|max:81920',
+            'meta_title'=>'required|string|min:5|max:60',
             'meta_description'=>'required|string|min:100|max:160',
             'focus_keyword'=>'required|string',
             'tags'=>'required',
@@ -103,63 +103,16 @@ class CategoryController extends Controller
 
          }
 
-        // Update Category Details
-        // public function updateCategory(Request $request)
-        // {
-        //     //dd($request->cat_img);
-        //     $id=$request->id;
-        //     // Validate the request data
-
-        //     $request->validate([
-        //         'name' => 'required|string|max:100', 
-        //         'description' => 'required', 
-                
-        //     ]);
-
-
-        //     $request->validate([
-        //         'name' => 'required|string|max:100', 
-        //         'description' => 'required',
-        //         'meta_title'=>'required|string|min:30|max:60',
-        //         'meta_description'=>'required|string|min:100|max:160',
-        //         'focus_keyword'=>'required|string',
-        //         'tags'=>'required|unique:category',
-    
-        //     ],
-        //     [
-        //         'name.required'=>'Please enter category name',
-        //         'description.required'=>'Please enter description',
-        //         'meta_title.required'=>'Please enter meta title',
-        //         'meta_description.required'=>'Please enter meta description',
-        //         'focus_keyword.required'=>'Please enter focus keyword',
-        //         'tags.required'=>'Please add tags name',  
-        //     ]);
-
-        //     $input = $request->all();
-        //     //image upload
-        //     if ($image = $request->file('cat_img')) 
-        //     {
-        //         $destinationPath = 'backend/images/';
-        //         $profileImage = date('YmdHis') . "." . $image->getClientOriginalExtension();
-        //         $image->move($destinationPath, $profileImage);
-        //         $input['cat_img'] = "$profileImage";    
-        //     }
-            
-        //     $data=Category::find($id);
-        //     $data->update($input);
-        //     // Redirect with a success message
-        //     return redirect('/category')->with('status', 'Product category details have been updated successfully.!!');
-        // }
 
         public function updateCategory(Request $request)
         {
             $id = $request->id;
-
+           // dd($id);
             // Validate the request data
             $request->validate([
                 'name' => 'required|string|max:100',
                 'description' => 'required',
-                'meta_title' => 'required|string|min:30|max:60',
+                'meta_title' => 'required|string|min:5|max:60',
                 'meta_description' => 'required|string|min:100|max:160',
                 'focus_keyword' => 'required|string',
                 'tags' => 'required',
@@ -191,6 +144,7 @@ class CategoryController extends Controller
             
             // Update category
             $data = Category::find($id);
+            $data->update($input);
             $data->update(array_merge($input, ['tags' => $tags_data]));
 
             // Redirect with a success message

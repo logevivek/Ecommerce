@@ -30,7 +30,7 @@
            
                     </div>
                     <div class="card-body">
-                        <form action="/storecategory" method="post" id="#" enctype="multipart/form-data">
+                        <form action="/storecategory" method="post" id="myForm" enctype="multipart/form-data">
                             @csrf
                             <fieldset class="border p-3 rounded">
                             <legend class="w-auto px-2"><strong>Category Details</strong></legend>

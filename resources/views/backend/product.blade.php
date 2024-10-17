@@ -63,8 +63,8 @@
                                 <td class="text-center">
                                     <input data-id="{{$values->id}}" class="toggle-product" type="checkbox" data-onstyle="danger" data-offstyle="success" data-toggle="toggle" data-on="Deactive" data-off="Active" {{ $values->status ? 'checked' : '' }}>  
                                 </td>
-                                  <td class="text-center"> 
-                                    <a href="/editProduct?id={{ $values->id }}" class="btn btn-success" title="Update record"> <i class="fa fa-edit"></i></a>
+                                  <td class="text-center d-flex"> 
+                                    <a href="/editProduct?id={{ $values->id }}" class="btn btn-success" title="Update record"> <i class="fa fa-edit"></i></a>&nbsp;
                                     <a href="javascript:void(0)" class="btn btn-danger" title="Delete record" onclick="confirmProDelete({{ $values->id }})">
                                       <i class="fa fa-trash"></i>
                                 </td>
@@ -85,6 +85,7 @@
     @section('title')
     Product
     @endsection
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script>
 

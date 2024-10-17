@@ -1,10 +1,10 @@
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="Ogani Template">
-    <meta name="keywords" content="Ogani, unica, creative, html">
+    <meta name="description" content="{{ $meta_data->meta_description}}">
+    <meta name="keywords" content="{{ $meta_data->tags}}">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Ecom - @yield('title', 'Website')</title>
+    <title>{{ $meta_data->meta_title}}</title>
 
     <!-- Google Font -->
     <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">

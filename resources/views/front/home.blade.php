@@ -79,10 +79,10 @@
    </script>
    @endif
   @endsection
-
+{{-- 
   @section('title')
     Home Page
-   @endsection
+   @endsection --}}
 
 
 

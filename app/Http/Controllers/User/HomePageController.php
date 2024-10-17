@@ -17,8 +17,9 @@ class HomePageController extends Controller
     $pro_data = Product::get();
     $web_data=Website::get();
     $banner_data=Banner::get();
-    // dd($cat_data);
-    return view('front.home' , compact('cat_data','pro_data','web_data','banner_data'));
+    $meta_data=Page::where('meta_title','Home Page')->first();
+    //dd($homepage_meta_data);
+    return view('front.home' , compact('cat_data','pro_data','web_data','banner_data','meta_data'));
 
     }
 
@@ -30,9 +31,11 @@ class HomePageController extends Controller
         $category_data = Category::get();
         $review_data=ProductReview::get();
         $totalReview=count($review_data);
-        //dd($review_data);
+        $meta_data=Product::where('id', $id)
+        ->first();
+        //dd($meta_data);
         $web_data=Website::get();
-        return view('front.prodetails' , compact('category_data','web_data','single_product','related_product','review_data','totalReview'));
+        return view('front.prodetails' , compact('category_data','web_data','single_product','related_product','review_data','totalReview','meta_data'));
     }
 
     // Product Review Function 
@@ -64,7 +67,8 @@ class HomePageController extends Controller
             $pro_data = Product::get();
             $category_data = Category::get();
             $web_data=Website::get();
-            return view('front.cart' ,compact('category_data','pro_data','web_data','banner_data'));
+            $meta_data=Page::first();
+            return view('front.cart' ,compact('category_data','pro_data','web_data','banner_data','meta_data'));
         }
 
 
@@ -125,15 +129,18 @@ class HomePageController extends Controller
             ->leftJoin('category', 'products.cat_id', '=', 'category.id')
             ->select('products.*', 'category.*')
             ->get();
+            $meta_data=Category::where('id', $id)
+            ->first();
            //dd($cat_base_product['0']['name']);
-            return view('front.showcategory', compact('web_data','category_data','cat_base_product','banner_data'));
+            return view('front.showcategory', compact('web_data','category_data','cat_base_product','banner_data','meta_data'));
         }
 
         Public function ContactPage(){
 
             $web_data=Website::get();
             $category_data = Category::get();
-            return view('front.contactpage',compact('web_data','category_data'));
+            $meta_data=Page::where('meta_title','Contact Us Page')->first();
+            return view('front.contactpage',compact('web_data','category_data','meta_data'));
 
         }
 
@@ -156,7 +163,8 @@ class HomePageController extends Controller
             $web_data=Website::get();
             $category_data = Category::get();
             $about_data=Page::where('title','About Us')->get();
-            return view('front.aboutpage',compact('web_data','category_data','about_data'));
+            $meta_data=Page::where('meta_title','About Us Page')->first();
+            return view('front.aboutpage',compact('web_data','category_data','about_data','meta_data'));
     
         }
 
@@ -164,14 +172,17 @@ class HomePageController extends Controller
             $web_data=Website::get();
             $category_data = Category::get();
             $privacy_data=Page::where('title','Privacy Policy')->get();
-            return view('front.privacypage', compact('web_data','category_data','privacy_data'));
+            $meta_data=Page::where('meta_title','Privacy Policy Page')->first();
+
+            return view('front.privacypage', compact('web_data','category_data','privacy_data','meta_data'));
         }
 
         public function TermPage(){
             $web_data=Website::get();
             $category_data = Category::get();
             $term_data=Page::where('title','Terms & Conditions')->get();
-            return view('front.termpage',compact('web_data','category_data','term_data'));
+            $meta_data=Page::where('meta_title','Privacy Policy Page')->first();
+            return view('front.termpage',compact('web_data','category_data','term_data','meta_data'));
         }
 
 
@@ -196,10 +207,13 @@ class HomePageController extends Controller
                 $category_data = Category::get();
                 $web_data=Website::get();
                 $products=Product::where("pro_name","LIKE","%$search_product%")->get();
+                $meta_data=Product::where("pro_name","LIKE","%$search_product%")->first();
+               
                 //dd($products);
+
                 if($products)
                 {
-                    return view('front.searchproduct', compact('category_data','products','web_data'));
+                    return view('front.searchproduct', compact('category_data','products','web_data','meta_data'));
                 }
                 else
                 {
@@ -221,8 +235,9 @@ class HomePageController extends Controller
             $web_data=Website::get();
             $category_data = Category::get();
             $carts_data = session()->get('cart', []);
+            $meta_data=Page::first();
             //dd($cart);
-            return view('front.checkoutpage', compact('web_data','category_data','carts_data'));
+            return view('front.checkoutpage', compact('web_data','category_data','carts_data','meta_data'));
         }
 
 }

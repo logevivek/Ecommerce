@@ -27,7 +27,7 @@
                         <a href="product" class="btn btn-danger float-right">Back</a>
                     </div>
                     <div class="card-body">
-                        <form action="/updateproduct?id={{ $product->id }}" method="post" id="ProductForm" enctype="multipart/form-data">
+                        <form action="/updateproduct?id={{ $product->id }}" method="post" id="proForm" enctype="multipart/form-data">
                             @csrf
                         <fieldset class="border p-3 rounded">
                                 <legend class="w-auto px-2"><strong>Products Details</strong></legend>
@@ -75,6 +75,7 @@
                                     <div style="position: relative; margin-right: 16px;">
                                         <img src="backend/images/{{  $product->pro_img }}"  id="pro_imgpreview" style="max-height:100px; margin-top: 23px; padding: 8px;" />
                                         <span id="cancel2">X</span>
+                                      
                                     </div>
                                 </div>
                             </div>
