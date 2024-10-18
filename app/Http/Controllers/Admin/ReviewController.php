@@ -13,6 +13,7 @@ class ReviewController extends Controller
         $review = ProductReview::orderBy('id', 'desc')
         ->join('products', 'product_reviews.product_id' ,'=','products.id')
         ->select('product_reviews.*','products.pro_name')
+        ->where('products.trash', 0)
          ->get();
         $TotalReview=count($review);
         return view('backend.showproreview' , compact('review','TotalReview'));

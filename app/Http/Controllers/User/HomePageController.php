@@ -14,7 +14,7 @@ class HomePageController extends Controller
 {
     public function ShowHomePage(){
     $cat_data = Category::get();
-    $pro_data = Product::get();
+    $pro_data = Product::orderBy('id','desc')->get();
     $web_data=Website::get();
     $banner_data=Banner::get();
     $meta_data=Page::where('meta_title','Home Page')->first();
@@ -29,7 +29,9 @@ class HomePageController extends Controller
         $cat_id=$single_product->cat_id;
         $related_product=Product::where('cat_id',$cat_id)->where('id', '!=', $cat_id)->get();
         $category_data = Category::get();
-        $review_data=ProductReview::get();
+        $review_data=ProductReview::where('product_id', $id)
+        ->where('status', 0)
+        ->get();
         $totalReview=count($review_data);
         $meta_data=Product::where('id', $id)
         ->first();
@@ -65,9 +67,11 @@ class HomePageController extends Controller
         {
             $banner_data=Banner::get();
             $pro_data = Product::get();
+
             $category_data = Category::get();
             $web_data=Website::get();
-            $meta_data=Page::first();
+            $meta_data=Page::where('meta_title', 'Cart Page')->first();
+           // dd($meta_data);
             return view('front.cart' ,compact('category_data','pro_data','web_data','banner_data','meta_data'));
         }
 

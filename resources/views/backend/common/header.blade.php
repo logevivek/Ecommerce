@@ -12,10 +12,13 @@
       <li class="nav-item dropdown">
         <a class="nav-link" title="Logout"  onclick="confirmLogout()"><i class="fas fa-power-off" style="color:red"></i></a>
       </li>
-      
+
+      <li class="nav-item">
+        <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+          <i class="fas fa-th-large"></i>
+        </a>
+      </li>
     </ul>
   </nav>
   <!-- /.navbar -->    
 
-  {{-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.css">
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert.min.js"></script> --}}

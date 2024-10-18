@@ -17,83 +17,91 @@
               </div>
             </div><!-- /.container-fluid -->
           </section>
+       
           <section class="content">
             <div class="container-fluid">
               <div class="row">
                 <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">
-                        <a href="/order" class="btn btn-danger" style="margin-left:95%;">Back</a>
+                        <a href="/order" class="btn btn-danger float-right">Back</a>
                     </div>
 
                     <div class="card-body">
-                      <fieldset class="border p-3 rounded">
-                        <legend class="w-auto px-2">Order Details</legend>
+                
+                     <fieldset class="border p-3 rounded">
+                        <legend class="w-auto px-2">Customer Details</legend>
                         <div class="d-flex justify-content-between">
                             <div class="w-50 me-2">
                                 <div class="mb-3">
-                                    <label class="fw-bold">Order Id:</label>
-                                    <p>{{ $order_data->order_id }}</p>
+                                    <label class="fw-bold">Customer Id:</label>
+                                    <p>{{ $order_data['0']->customer_id }}</p>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="fw-bold">Product Price:</label>
-                                    <p>{{ $order_data->pro_price }}</p> 
+                                    <label class="fw-bold">Customer Name:</label>
+                                    <p> {{ $order_data['0']->first_name }} {{ $order_data['0']->last_name }} </p> 
                                 </div>
                             </div>
                     
                             <div class="w-50 ms-2">
                                 <div class="mb-3">
-                                    <label class="fw-bold">Product Name:</label>
-                                    <p>{{ $order_data->pro_name }}</p>
+                                    <label class="fw-bold">Phone:</label>
+                                    <p>{{ $order_data['0']->phone }}</p>
                                 </div>
                                 <div class="mb-3">
-                                    <label class="fw-bold">Quantity:</label>
-                                    <p>{{ $order_data->pro_quantity }}</p>
+                                    <label class="fw-bold">Email:</label>
+                                    <p>{{ $order_data['0']->email }}</p>
+                                </div>
+                            </div>
+                            <div class="w-50 ms-2">
+                                <div class="mb-3">
+                                    <label class="fw-bold">Payment Mode:</label>
+                                    <p>{{ $order_data['0']->pay_mode }}</p>
+                                </div>
+                                <div class="mb-3">
+                                    <label class="fw-bold">Address:</label>
+                                    <p>{{ $order_data['0']->address }}</p>
                                 </div>
                             </div>
                         </div>
-                    </fieldset>
+                    </fieldset><br>
 
                     <fieldset class="border p-3 rounded">
-                      <legend class="w-auto px-2">Customer Details</legend>
+                      <legend class="w-auto px-2">Order Details</legend>
                       <div class="d-flex justify-content-between">
-                          <div class="w-50 me-2">
-                              <div class="mb-3">
-                                  <label class="fw-bold">Customer Name:</label>
-                                  <p>{{ $order_data->first_name }} {{ $order_data->last_name }}</p>
-                              </div>
-                              <div class="mb-3">
-                                  <label class="fw-bold">Email:</label>
-                                  <p>{{ $order_data->email  }}</p> 
-                              </div>
-                          </div>
-                  
-                          <div class="w-50 ms-2">
-                              <div class="mb-3">
-                                  <label class="fw-bold">Phone:</label>
-                                  <p>{{ $order_data->phone }}</p>
-                              </div>
-                              <div class="mb-3">
-                                  <label class="fw-bold">Payment Mode:</label>
-                                  <p>{{ $order_data->pay_mode }}</p> 
-                              </div>
-                          </div>
+                        
+                        <table class="table table-bordered table-striped">
+                            <thead>
+                        <tr class="text-center">
+                            <th>Sr No</th>
+                            <th>Product</th>
+                            <th>Quantity</th>
+                            <th>Price</th>
+                        </tr>
+                            </thead>
+                            <tbody>
+                    @php $totalPrice = 0  @endphp
+                    @foreach ($order_data as  $order_values)
+                    @php  $totalPrice += $order_values->pro_price * $order_values->pro_quantity @endphp
 
-
-                          <div class="w-50 ms-2">
-                            <div class="mb-3">
-                                <label class="fw-bold">Address:</label>
-                                <p>{{ $order_data->address }}</p>
-                            </div>
-                            <div class="mb-3">
-                                <label class="fw-bold">Image:</label>
-                                <br>
-                                <img src="backend/images/{{ $order_data->pro_img }}" style="border:1px solid;" width="100px" height="100px"/>
-                                
-                            </div>
-                        </div>
+                        <tr>
+                            <td>{{ $loop->iteration}}</td>
+                            <td>{{ $order_values->pro_name }}</td>
+                            <td>{{$order_values->pro_quantity}}</td>
+                            <td>{{$order_values->pro_price}}</td>
+                        </tr>
+                       
+                        @endforeach
+                            </tbody>
+                     
+                        <tr class="text-center">
+                            <td colspan="4"><b>Total Price</b> : {{ $totalPrice}}</td>
+                        </tr>
+                          </table>
                       </div>
-                  </fieldset>
+                  </fieldset> 
+
+                  
                   </div>
                 </div>
             </div>

@@ -52,8 +52,6 @@ class BannerController extends Controller
        
     }
 
-
-
     public function editBanner(Request $request){
         //dd($request);
         $id=$request->query('id');

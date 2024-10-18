@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->text('review');
             $table->integer('star_rating');
-            $table->integer('status')->default(0);
+            $table->integer('status')->default(1);
             $table->integer('trash')->default(0);
             $table->timestamps();
         });
@@ -30,5 +30,6 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('product_reviews');
+
     }
 };

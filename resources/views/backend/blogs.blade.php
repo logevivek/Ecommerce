@@ -53,7 +53,7 @@
                                 <td>{{ $loop->iteration }}</td>
                                 <td>{{ $blog_values->title }}</td>
                                 <td>{{ $blog_values->heading }}</td>
-                                <td>{{ $blog_values->blog_desc }}</td>
+                                <td> {!! $blog_values->blog_desc !!}</td>
                                 <td><img src="backend/images/{{ $blog_values->blog_banner }}" width="150px" height="150px"/></td>
                                 <td class="text-center d-flex">
                                   <a href="/editbolgs?id={{ $blog_values->id }}" class="btn btn-success" title="Update record"> <i class="fa fa-edit"></i></a>&nbsp;

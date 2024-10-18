@@ -29,7 +29,7 @@ class ShopPageController extends Controller
             }
         }
     
-        $pro_data = $query->get();
+        $pro_data = Product::orderBy('id','desc')->simplePaginate(6);
         $totalProducts = $pro_data->count();
         $meta_data=Page::where('meta_title','Shop Page')->first();
     

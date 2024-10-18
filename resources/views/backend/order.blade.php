@@ -33,22 +33,26 @@
 
                               <table id="example1" class="table table-bordered table-striped">
                                 <thead style="background-color:#007bff">
-                                <tr class="text-center" style="color:aliceblue">
+                            <tr class="text-center" style="color:aliceblue">
                                 <th>Sr No</th>
                                   <th>Order Id</th>
-                                  <th>Price</th>
-                                  <th>Quantity</th>
+                                  <th>Customer Id</th>
+                                  <th>Customer Name</th>
+                                  <th>Email</th>
+                                  <th>Phone</th>
                                   <th>Status</th>
                                   <th>Action</th>
-                                </tr>
+                              </tr>
                                 </thead>
                                 <tbody>
                             @foreach ( $order as $values )
                           <tr class="text-center">
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{ $values->order_id}}</td>
-                                <td>{{ $values->pro_price}}</td>
-                                <td>{{ $values->pro_quantity}}</td>
+                                <td>{{ $values->customer_id}}</td>
+                                <td>{{ $values->first_name}} {{ $values->last_name}}</td>
+                                <td>{{ $values->email}}</td>
+                                <td>{{ $values->phone}}</td>
                                 <td class="text-center">
                                   <form id="status-form-{{ $values->id }}" class="d-inline">
                                       @csrf
@@ -62,12 +66,12 @@
                                   </form>
                               </td>
                                 <td class="text-center"> 
-                                    <a href="/Vieworder?id={{ $values->id }}" class="btn btn-info" title="View record"><i class="fa fa-eye"></i></a>
+                                    <a href="/Vieworder?order_id={{ $values->order_id }}" class="btn btn-info" title="View record"><i class="fa fa-eye"></i></a>
                                 </td>
                           </tr>
                                 @endforeach
                                 </tbody>
-                            </tr>
+                          
                               </table>
                             </div>
                           </div>

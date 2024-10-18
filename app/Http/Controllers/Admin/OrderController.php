@@ -11,24 +11,29 @@ class OrderController extends Controller
 {
     public function ShowOrder()
     {
-
-        $order = Order::orderBy('id', 'desc')->get();
+        // $order = Order::orderBy('id', 'desc')->get();
+        $order = DB::table('orders')
+        ->join('order_details', 'orders.order_id','=','order_details.order_id')
+        ->select('order_details.*','orders.*')
+        ->get();
+        //dd($order);
         $TotalOrder=count($order);
         return view('/backend.order', compact('order','TotalOrder'));
     }
 
+
     public function ViewOrder(Request $request)
 
-        {
-            $id=$request->query('id');
-            $order_data = DB::table('orders')
-            ->join('order_details', 'orders.order_id' ,'=','order_details.order_id')
-            ->join('products', 'orders.pro_id', '=', 'products.id')
-            ->select('orders.*','order_details.*','products.pro_name','products.pro_img')
-            ->where('orders.id',$id)
-            // ->toRawSql();
-            // return $order_data;
-        ->first();
+    {
+            $order_id=$request->query('order_id');
+            //dd($order_id);
+            $order_data = DB::table('order_details')
+            ->leftJoin('orders', 'order_details.order_id' ,'=','orders.order_id')
+            ->leftJoin('products', 'orders.pro_id', '=', 'products.id')
+            ->select('orders.*','order_details.*','products.pro_name','products.pro_img','products.pro_price')
+            ->where('orders.order_id',$order_id)
+            ->get();
+       //dd($order_data);
         return view('backend.Vieworder' , ['order_data' => $order_data]);
 
         }

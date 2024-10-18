@@ -154,6 +154,13 @@
                         </div>
                     </div>
                     @endforeach
+                 
+                    @if(!empty($pro_data))
+                    <div class="col-lg-12 text-center">
+                        {{  $pro_data->links() }}
+                      
+                    </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -164,7 +171,6 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 <script type="text/javascript">
     $(function() {
-        // Set min and max from the request if available, otherwise default
         var minPrice = {{ request('min_price', 50) }};
         var maxPrice = {{ request('max_price', 1000) }};
         

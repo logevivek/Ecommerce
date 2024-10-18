@@ -69,21 +69,16 @@ p {
                                         <li><i class="fa fa-calendar-o"></i> {{$blogvalues->created_at->format('Y-m-d')}}</li>
                                     </ul>
                                     <h5><a href="blogdetailspage/{{ $blogvalues->id }}">{{$blogvalues->heading}}</a></h5>
-                                    <p>{{$blogvalues->blog_desc}}</p>
+                                    <p>{!! $blogvalues->blog_desc !!}</p>
                                     <a href="blogdetailspage/{{ $blogvalues->id }}" class="blog__btn">READ MORE <span class="arrow_right"></span></a>
                                 </div>
                             </div>
                         </div>
                         @endforeach
                     
-                        <div class="col-lg-12">
-                            <div class="product__pagination blog__pagination">
-                                <a href="#">1</a>
-                                <a href="#">2</a>
-                                <a href="#">3</a>
-                                <a href="#"><i class="fa fa-long-arrow-right"></i></a>
-                            </div>
-                        </div>
+                    <div class="col-lg-12">
+                        {!! $blogs_data->links() !!}
+                    </div>
                     </div>
                 </div>
             </div>

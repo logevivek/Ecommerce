@@ -6,9 +6,9 @@
         <div class="row">
             <div class="categories__slider owl-carousel">
                 @foreach ( $cat_data as $values)
-                <div class="col-lg-3">
+                <div class="col-lg-3" onclick="location.href='productcategory/{{ $values->id }}';" style="cursor: pointer;">
                     <div class="categories__item set-bg" data-setbg="backend/images/{{ $values->cat_img }}">
-                        <h5><a href="#">{{ $values->name }}</a></h5>
+                        <h5><a href="productcategory/{{ $values->id }}">{{ $values->name }}</a></h5>
                     </div>
                 </div>
                 @endforeach
@@ -45,6 +45,9 @@
                 </div>
             </div>
             @endforeach
+            {{-- <div class="col-lg-12 text-center">
+                {!! $pro_data->links() !!}
+            </div> --}}
         </div>
     </div>
 </section>

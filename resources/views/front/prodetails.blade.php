@@ -154,7 +154,7 @@
                             @endif
                             <li><b>Shipping</b> <span>01 day shipping. <samp>Free pickup today</samp></span></li>
                             <li><b>Quantity</b> <span>{{$single_product->pro_quantity}}</span></li>  
-                            {{-- <li><b>Description</b> <span>{!! $single_product->pro_desc !!}</span></li>   --}}
+                           
                         </ul>
                     </div>
                 </div>
