@@ -126,13 +126,7 @@
                     <div class="row">
                         <div class="col-lg-4 col-md-4">
                             <div class="filter__found">
-                                <h6><span>Total {{$totalProducts}}</span> Products found</h6>
-                            </div>
-                        </div>
-                        <div class="col-lg-4 col-md-3">
-                            <div class="filter__option">
-                                <span class="icon_grid-2x2"></span>
-                                <span class="icon_ul"></span>
+                                <h6><span>Total - {{$totalProducts}}</span> Products found</h6>
                             </div>
                         </div>
                     </div>

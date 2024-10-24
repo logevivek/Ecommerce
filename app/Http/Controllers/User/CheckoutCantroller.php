@@ -30,7 +30,7 @@ class CheckoutCantroller extends Controller
                 $coupon_discount = $result->discount;
                 $coupon_limit = $result->coupon_limit;
 
-        // Check Coupon attempt limit here, 0 means user use coupon unlimited time
+            // Check Coupon attempt limit here, 0 means user use coupon unlimited time
             if ( $result->coupon_attempt == 0 || $result->coupon_attempt > $coupon_limit ) 
             {
                     // 1 increment coupon_limit value in coupon_codes table  
@@ -45,7 +45,7 @@ class CheckoutCantroller extends Controller
                         $discount_value= ($coupon_discount/100) * $total_cardvalue;
                         // Less Discount Amount From Total Amount
                         $lessdiscountGrandTotal=$total_cardvalue-$discount_value;
-                        
+                
                        //dd($lessdiscountGrandTotal);
                     }
 
@@ -80,11 +80,11 @@ class CheckoutCantroller extends Controller
     }
 
 
-    //Remove Coupon Code Function /////////////////////////////////////////////
+        //Remove Coupon Code Function 
             public function RemoveCouponCode(Request $request){
+            
                 $result = CouponCode::where(['coupon_name' => $request->coupon_name])->first();
                 $coupon_name = $result->coupon_name;
-                //dd($result);
 
                 // 1 decrement coupon_limit value in coupon_codes table when user remove code// 
                 CouponCode::where('coupon_name', '=', $coupon_name)->decrement('coupon_limit', 1);
@@ -155,7 +155,6 @@ class CheckoutCantroller extends Controller
                 ->update(['pro_quantity' => $RemainingQty]);
         }
 
-
         $request->validate([
 
             'first_name' => 'required',
@@ -168,7 +167,7 @@ class CheckoutCantroller extends Controller
             'address' => 'required',
             'pincode' => 'required',
             'pay_mode' => 'required',
-    // Add new Column data 
+        // Add new Column data 
             'total_amount' => 'required',
             'coupon_discount' => 'required',
             'grand_total' => 'required',
@@ -197,7 +196,7 @@ class CheckoutCantroller extends Controller
 
         ]);
 
-        // Remove All Session Here..
+        // Remove All Session Here After order placed
         Session::flush();
         return redirect('index')->with('success', 'Your order has been placed successfully!');
     }

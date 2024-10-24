@@ -24,21 +24,20 @@ class OrderController extends Controller
 
     public function ViewOrder(Request $request)
     {
-            $order_id=$request->query('order_id');
-            //dd($order_id);
-            $order_data = DB::table('order_details')
-            ->leftJoin('orders', 'order_details.order_id' ,'=','orders.order_id')
-            ->leftJoin('products', 'orders.pro_id', '=', 'products.id')
-            ->select('orders.*','order_details.*','products.pro_name','products.pro_img','products.pro_price')
-            ->where('orders.order_id',$order_id)
-            ->get();
+        $order_id=$request->query('order_id');
+        $order_data = DB::table('order_details')
+        ->leftJoin('orders', 'order_details.order_id' ,'=','orders.order_id')
+        ->leftJoin('products', 'orders.pro_id', '=', 'products.id')
+        ->select('orders.*','order_details.*','products.pro_name','products.pro_img','products.pro_price')
+        ->where('orders.order_id',$order_id)
+        ->get();
        //dd($order_data);
-        return view('backend.Vieworder' , ['order_data' => $order_data]);
-
+        return view('backend.Vieworder' , ['order_data' => $order_data] );
+  
         }
 
     
-    // order Update function
+    //order Update function
     public function updateOrderStatus(Request $request)
         {
             // Validate the request
@@ -47,7 +46,7 @@ class OrderController extends Controller
                 'status' => 'required|integer|min:0|max:3',
             ]);
         
-            // Find the order and update its status
+        // Find the order and update its status
             $order = Order::find($request->id);
             $order->status = $request->status;
             $order->save();

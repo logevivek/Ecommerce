@@ -29,27 +29,24 @@ class HomePageController extends Controller
         $cat_id=$single_product->cat_id;
         $related_product=Product::where('cat_id',$cat_id)->where('id', '!=', $cat_id)->get();
         $category_data = Category::get();
-        $review_data=ProductReview::where('product_id', $id)
-        ->where('status', 0)
-        ->get();
+        $review_data=ProductReview::where('product_id', $id)->where('status', 0)->get();
         $totalReview=count($review_data);
-        $meta_data=Product::where('id', $id)
-        ->first();
+        $meta_data=Product::where('id', $id)->first();
         //dd($meta_data);
         $web_data=Website::get();
         return view('front.prodetails' , compact('category_data','web_data','single_product','related_product','review_data','totalReview','meta_data'));
     }
 
-    // Product Review Function 
 
-    public function StoreProReview(Request $request){
 
-    //dd($request);
-        $Proid=$request->id;
-         $request->validate([
-           'coustomer_name' => 'required',
-           'email'=>'required',
-           'review'=>'required',
+ // Product Review Function 
+        public function StoreProReview(Request $request){
+        //dd($request);
+            $Proid=$request->id;
+            $request->validate([
+            'coustomer_name' => 'required',
+            'email'=>'required',
+            'review'=>'required',
          ]);
 
          ProductReview::create([
@@ -115,7 +112,8 @@ class HomePageController extends Controller
         {
             if($request->id) {
                 $cart = session()->get('cart');
-                if(isset($cart[$request->id])) {
+                if(isset($cart[$request->id])) 
+                {
                     unset($cart[$request->id]);
                     session()->put('cart', $cart);
                 }
@@ -132,8 +130,7 @@ class HomePageController extends Controller
             ->leftJoin('category', 'products.cat_id', '=', 'category.id')
             ->select('products.*', 'category.*')
             ->simplePaginate(4);
-            $meta_data=Category::where('id', $id)
-            ->first();
+            $meta_data=Category::where('id', $id)->first();
            //dd($cat_base_product['0']['name']);
             return view('front.showcategory', compact('web_data','category_data','cat_base_product','banner_data','meta_data'));
         }
@@ -157,7 +154,7 @@ class HomePageController extends Controller
 
             Contact::create($request->all());
             return redirect()->back()
-            ->with(['success' => 'Thank you for contact us. we will contact you shortly.']);
+            ->with(['success' => 'Thank you for contact us. We will contact you shortly.']);
         }
 
 
@@ -218,6 +215,7 @@ class HomePageController extends Controller
                 {
                     return view('front.searchproduct', compact('category_data','products','web_data','meta_data'));
                 }
+                
                 else
                 {
                     return redirect()->back()->with('success', 'No product matched your search !');

@@ -50,8 +50,9 @@
             width: auto;
         }
 
+
     a {
-        font-size: 14px;
+        font-size: 18px;
         color: red;
         margin: 15px;
     }
@@ -173,7 +174,7 @@
                                 </ul>
                                 <div class="checkout__order__total">Total Amount <span id="total_price"> &#8377; {{ $total }} /- </span></div>
 
-                                <div class="checkout__order__total" id="remove_coupan_discount">Coupon Discount <a href="javascript:void(0)" title="Remove coupon discount" onclick="remove_coupon_discount()">Remove</a><span id="discount_value"> &#8377; 0/-</span></div>
+                                <div class="checkout__order__total" id="remove_coupan_discount">Coupon Discount <a href="javascript:void(0)" title="Remove coupon discount" onclick="remove_coupon_discount()"><i class="fa fa-trash" aria-hidden="true"></i></a><span id="discount_value"> &#8377; 0/-</span></div>
 
                                 <div class="checkout__order__total" id="remove_grand_total">Grand Total <span id="lessdiscountGrandTotal"> &#8377; {{ $total }} /- </span></div>
                                 {{-- send hidden input value --}}
@@ -194,15 +195,14 @@
    {{-- alertify --}}
     <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.min.css" rel="stylesheet">
-
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
 
     <script>
-    // By default remove button hide 
-    $(document).ready(function(){
-        jQuery('#remove_coupan_discount').hide();
-      });
+        // By default remove button hide 
+        $(document).ready(function(){
+            jQuery('#remove_coupan_discount').hide();
+        });
     </script>
 
 <script>
@@ -225,6 +225,7 @@
                 alertify.error(response.msg); 
                 }
                 if(response.status == 'success')
+
                     {
                         jQuery('#remove_coupan_discount').show();
                         var discount_value=response.discount_value;
@@ -233,7 +234,7 @@
                         jQuery('#discount_value').text(discount_value)
                         jQuery('#lessdiscountGrandTotal').text(lessdiscountGrandTotal)
 
-                    //send hidden fields value code
+                    //Send hidden fields value code
                         jQuery('#coupon_discount').val(discount_value);
                         jQuery('#grand_total').val(lessdiscountGrandTotal);
 
@@ -283,6 +284,7 @@
               });
            }
         }
+
     </script>
 <!-- Checkout Section End -->
  @endsection

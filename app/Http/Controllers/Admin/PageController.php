@@ -27,8 +27,6 @@ class PageController extends Controller
         $tags_values = array_column($array, 'value');
         $tags_data = implode(", ", $tags_values);
 
-        //dd($tags_data); 
-
         $request->validate([
             'title' => 'required|string|unique:pages|max:50',
             'heading' => 'required',
@@ -74,14 +72,9 @@ class PageController extends Controller
 
     public function editPage(Request $request){
         $id=$request->query('id');
-        //dd($id);
-        $page = DB::table('pages')
-            ->where('pages.id',$id)
-            ->first();
-            return view('backend.editPage' , ['page' => $page]);
+        $page = DB::table('pages')->where('pages.id',$id)->first();
+        return view('backend.editPage' , ['page' => $page]);
     }
-
-
 
     public function updatePage(Request $request){
 
@@ -97,14 +90,13 @@ class PageController extends Controller
             'tags'=>'required', 
         ]);
 
-    //Decode tags
+    //decode tags
         $jsonString = $request->tags;
         $array = json_decode($jsonString, true);
         $tags_values = array_column($array, 'value');
         $tags_data = implode(", ", $tags_values);
         $input = $request->all();
 
-    
         $data=Page::find($id);
         $data->update($input);
         // Update tags 

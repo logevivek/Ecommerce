@@ -57,9 +57,7 @@ class WebsiteController extends Controller
     public function editWebsite(Request $request){
         //dd($id);
         $id=$request->query('id');
-        $website = DB::table('websites')
-        ->where('websites.id',$id)
-        ->first();
+        $website = DB::table('websites')->where('websites.id',$id)->first();
         return view('backend.editwebsite' , ['website' => $website]);
     }
 
