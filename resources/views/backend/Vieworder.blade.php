@@ -68,15 +68,15 @@
 
                     <fieldset class="border p-3 rounded">
                       <legend class="w-auto px-2">Order Details</legend>
-                      <div class="d-flex justify-content-between">
+                    
                         
-                        <table class="table table-bordered table-striped">
-                            <thead>
-                        <tr class="text-center">
+                        <table id="example1" class="table table-bordered table-striped">
+                            <thead style="background-color:#007bff">
+                            <tr class="text-center" style="color:aliceblue">
                             <th>Sr No</th>
-                            <th>Product</th>
-                            <th>Quantity</th>
-                            <th>Price</th>
+                            <th>Product Name</th>
+                            <th>Product Quantity</th>
+                            <th>Product Price</th>
                         </tr>
                             </thead>
                             <tbody>
@@ -84,7 +84,7 @@
                     @foreach ($order_data as  $order_values)
                     @php  $totalPrice += $order_values->pro_price * $order_values->pro_quantity @endphp
 
-                        <tr>
+                        <tr class="text-center">
                             <td>{{ $loop->iteration}}</td>
                             <td>{{ $order_values->pro_name }}</td>
                             <td>{{$order_values->pro_quantity}}</td>
@@ -98,7 +98,7 @@
                             <td colspan="4"><b>Total Price</b> : {{ $totalPrice}}</td>
                         </tr>
                           </table>
-                      </div>
+                      
                   </fieldset> 
 
                   

@@ -1,9 +1,9 @@
 
-<footer class="main-footer">
+{{-- <footer class="main-footer">
   <strong>Copyright © 2021 <a href="#">Logelite Pvt. Ltd.</a>.</strong>
       All rights reserved.
     </footer>
-  </div>
+  </div> --}}
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="{{asset('backend/js/script.js')}}"></script>
   <!-- jQuery -->

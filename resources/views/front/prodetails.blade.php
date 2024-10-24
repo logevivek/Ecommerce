@@ -159,8 +159,6 @@
                     </div>
                 </div>
 
-               
-
                 <div class="col-lg-12">
                     <div class="product__details__tab">
                         <ul class="nav nav-tabs" role="tablist">
@@ -197,7 +195,7 @@
                                                                     <div class="row">
                                                                         <div class="col-lg-6">
                                                                             <div class="checkout__input">
-                                                                                <p>Customer Name<span>*</span></p>
+                                                                                <p>Customer Name <span>*</span></p>
                                                                                 <input type="text" name="coustomer_name" placeholder="Enter customer name">
                                                                                 @error('coustomer_name') <span class="text-danger">{{ $message }}</span> @enderror
                                                                             </div>
@@ -205,7 +203,7 @@
                     
                                                                           <div class="col-lg-6">
                                                                             <div class="checkout__input">
-                                                                                <p>Email<span>*</span></p>
+                                                                                <p>Email <span>*</span></p>
                                                                                 <input type="email" name="email" placeholder="Enter customer email">
                                                                                 @error('email') <span class="text-danger">{{ $message }}</span> @enderror
                                                                             </div>
@@ -213,7 +211,7 @@
                                                                     </div>
                     
                                                                     <div class="checkout__input">
-                                                                        <p>Product Review<span>*</span></p>
+                                                                        <p>Product Review <span>*</span></p>
                                                                         <div class="rate">
                                                                             <input type="radio" id="star5" class="rate" name="star_rating" value="5"/>
                                                                             <label for="star5" title="text">5 stars</label>
@@ -227,12 +225,10 @@
                                                                             <label for="star1" title="text">1 star</label>
                                                                          </div>
                                                                     </div>
-                    
                                                                     <div class="checkout__input">
                                                                         <input type="text" name="review" placeholder="Enter product review">
                                                                         @error('review') <span class="text-danger">{{ $message }}</span> @enderror
                                                                     </div>
-                    
                                                                     <button type="submit" class="site-btn">Send Review</button>
                                                                 </div>
                                                                 
@@ -240,7 +236,9 @@
                                                             <div class="col-lg-4 col-md-6">
                                                                 <div class="pro_review" style="max-height: 300px; overflow-y: auto;">
                                                                 <h4>Product Review List</h4>
+
                                                                 @foreach($review_data as $review)
+                                                             
                                                                     <div class="pro_review">
                                                                         <div class="rated">
                                                                             @for($i = 1; $i <= $review->star_rating; $i++)
@@ -254,7 +252,9 @@
                                                                             </div>
                                                                         </div>
                                                                     </div>
+                                                                
                                                                 @endforeach
+                                                           
                                                             </div>
                                                         </div>
                                                             </div>

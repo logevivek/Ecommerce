@@ -67,7 +67,6 @@ class HomePageController extends Controller
         {
             $banner_data=Banner::get();
             $pro_data = Product::get();
-
             $category_data = Category::get();
             $web_data=Website::get();
             $meta_data=Page::where('meta_title', 'Cart Page')->first();
@@ -132,7 +131,7 @@ class HomePageController extends Controller
             $cat_base_product=Product::where('cat_id',$id)
             ->leftJoin('category', 'products.cat_id', '=', 'category.id')
             ->select('products.*', 'category.*')
-            ->get();
+            ->simplePaginate(4);
             $meta_data=Category::where('id', $id)
             ->first();
            //dd($cat_base_product['0']['name']);

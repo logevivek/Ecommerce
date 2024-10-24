@@ -39,7 +39,7 @@
                         <a href="index"><img src="{{asset('backend/images/'.$values->web_logo )}}" alt=""></a>
                     </div>
                 </div>
-                <div class="col-lg-6">
+                {{-- <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
                             <li class="active"><a href="index">Home</a></li>
@@ -47,10 +47,24 @@
                             <li><a href="blog">Blog</a></li>
                             <li><a href="about">About</a></li>
                             <li><a href="contact">Contact</a></li>
-
+                        </ul>
+                    </nav>
+                </div> --}}
+                
+                <div class="col-lg-6">
+                    <nav class="header__menu">
+                        <ul>
+                            <li class="{{ request()->is('index') ? 'active' : '' }}"><a href="{{ route('index') }}">Home</a></li>
+                            <li class="{{ request()->is('shop') ? 'active' : '' }}"><a href="{{ route('shop') }}">Shop</a></li>
+                            <li class="{{ request()->is('blog') ? 'active' : '' }}"><a href="{{ route('blog') }}">Blog</a></li>
+                            <li class="{{ request()->is('about') ? 'active' : '' }}"><a href="{{ route('about') }}">About</a></li>
+                            <li class="{{ request()->is('contact') ? 'active' : '' }}"><a href="{{ route('contact') }}">Contact</a></li>
                         </ul>
                     </nav>
                 </div>
+
+           
+
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>

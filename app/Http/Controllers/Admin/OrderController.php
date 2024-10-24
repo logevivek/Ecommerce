@@ -11,10 +11,10 @@ class OrderController extends Controller
 {
     public function ShowOrder()
     {
-        // $order = Order::orderBy('id', 'desc')->get();
-        $order = DB::table('orders')
-        ->join('order_details', 'orders.order_id','=','order_details.order_id')
-        ->select('order_details.*','orders.*')
+         $order = DB::table('orders')
+        ->join('order_details', 'orders.order_id', '=', 'order_details.order_id')
+        ->select('orders.order_id','orders.status', 'order_details.*')
+        ->distinct() 
         ->get();
         //dd($order);
         $TotalOrder=count($order);
@@ -23,7 +23,6 @@ class OrderController extends Controller
 
 
     public function ViewOrder(Request $request)
-
     {
             $order_id=$request->query('order_id');
             //dd($order_id);

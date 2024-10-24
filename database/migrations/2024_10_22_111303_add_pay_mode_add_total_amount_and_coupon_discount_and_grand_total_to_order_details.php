@@ -13,6 +13,9 @@ return new class extends Migration
     {
         Schema::table('order_details', function (Blueprint $table) {
             $table->string('pay_mode')->after('pincode');
+            $table->integer('total_amount')->after('pay_mode')->default(0);
+            $table->integer('coupon_discount')->after('total_amount')->default(0);
+            $table->integer('grand_total')->after('coupon_discount')->default(0);
         });
     }
 
@@ -22,7 +25,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('order_details', function (Blueprint $table) {
-            $table->string('pay_mode');
+            $table->dropColumn(['pay_mode', 'total_amount' , 'coupon_discount', 'grand_total']);
         });
     }
 };

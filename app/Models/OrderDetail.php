@@ -22,7 +22,11 @@ class OrderDetail extends Model
         'pincode', 
         'order_id',
         'customer_id',
-        'pay_mode'
+        'pay_mode',
+        'total_amount',
+        'coupon_discount',
+        'grand_total',
+
            
 ];
 

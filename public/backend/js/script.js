@@ -146,8 +146,6 @@ $(document).ready(function() {
         rules: {
             pro_name: {
                 required: true,
-                minlength: 5,
-                maxlength: 30
             },
             cat_id: {
                 required: true,
@@ -200,8 +198,6 @@ $(document).ready(function() {
         messages: {
             pro_name: {
                 required: "Please enter product name.",
-                minlength: "Your product name must be at least 5 characters long.",
-                maxlength: "Your product  name must be less than 30 characters."
             },
             cat_id: {
                 required: "Please select product category.",
@@ -647,26 +643,26 @@ function readURLblog(inputblog) {
      }
     }
 
-$("#blog_banner").change(function () {
-    readURLblog(this);
-});
+    $("#blog_banner").change(function () {
+        readURLblog(this);
+    });
 
-$("#blog_banner").click(function () {
-    $('#blogpreview').attr('src', "backend/images/dammy.png");
-    $('#blog_cancel').hide(); 
-});
+    $("#blog_banner").click(function () {
+        $('#blogpreview').attr('src', "backend/images/dammy.png");
+        $('#blog_cancel').hide(); 
+    });
 
-$('#blogpreview').click(function() {
-    $('#blog_banner').replaceWith($('#blog_banner').clone(true));
-    $('#blogpreview').hide();
-    $('#blog_cancel').hide(); 
-});
+    $('#blogpreview').click(function() {
+        $('#blog_banner').replaceWith($('#blog_banner').clone(true));
+        $('#blogpreview').hide();
+        $('#blog_cancel').hide(); 
+    });
 
-$('#blog_cancel').click(function(e) {
-    $('#blog_banner').val("");
-    $('#blogpreview').attr("src", "backend/images/dammy.png");
-    $(this).hide(); 
-})
+    $('#blog_cancel').click(function(e) {
+        $('#blog_banner').val("");
+        $('#blogpreview').attr("src", "backend/images/dammy.png");
+        $(this).hide(); 
+    })
 
 
 // Banner Image Preview Code
@@ -845,6 +841,27 @@ $('#cancel2').click(function(e) {
 }) 
 }); 
 
+//Active/Deactive Coupon code Button  code  
+$(function() { 
+    $('.toggle-coupon').change(function() { 
+    var status = $(this).prop('checked') == true ? 1 : 0;  
+    var coupon_id = $(this).data('id');  
+    // alert(coupon_id);
+    $.ajax({ 
+
+        type: "GET", 
+        dataType: "json", 
+        url: 'changeCoupanStatus', 
+        data: {'status': status, 'coupon_id':coupon_id }, 
+        success: function(data){ 
+        console.log(data.success);
+     } 
+  }); 
+}) 
+}); 
+//Active/Deactive Coupon code Button  code  
+
+
 // Update product Order Status
 $(document).ready(function() {
     $('.status-select').change(function() {
@@ -956,6 +973,30 @@ function confirmLogout() {
         }
     });
 }
+
+  // Delete Coupon Confirm Alert 
+  function confirmCouponsDelete(id) {
+    swal({
+        title: "Are you sure?",
+        text: "You want to delete this coupon record.?",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#DD6B55",
+        confirmButtonText: "Yes, delete it!",
+        cancelButtonText: "No, cancel!",
+        closeOnConfirm: false,
+        closeOnCancel: false
+    }, function(isConfirm){
+        if (isConfirm) {
+            // Redirect to delete URL
+            window.location.href = '/deletecoupons?id=' + id;
+        } else {
+            swal("Cancelled", "Your coupon is safe :)", "error");
+        }
+    });
+}
+
+
  
 // databale
  $(function () {

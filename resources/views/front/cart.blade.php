@@ -59,10 +59,7 @@
                                         <button class="btn btn-danger">Out of stock</button>
                                     </div>
                                 </td>
-
-                                  
-                                  @else
-                                        
+                                  @else 
                                   <td data-th="Quantity">
                                     <div class="pro-qty">
                                         <input type="number" min="1" value="{{ $details['quantity'] }}" id="disabledSearch" class="qty update-cart" />
@@ -82,7 +79,11 @@
                              </tr>
                              @endforeach
 
-                             @endif
+                             @else
+                                <td colspan="5" style="color:red">No product avilable</td>
+                              
+                              @endif
+
                             </tbody>
                         </table>
                     </div>
@@ -94,7 +95,7 @@
                         <a href="shop" class="primary-btn cart-btn">CONTINUE SHOPPING</a>
                     </div>
                 </div>
-      
+       
                 <div class="col-lg-6">
                     <div class="shoping__checkout">
                         <h5>Cart Total</h5>
@@ -114,39 +115,6 @@
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script type="text/javascript">
-        //  $(document).on('change', '.update-cart', function (e) {
-        //     e.preventDefault();
-        //     var ele = $(this);
-        //     var quantity = parseInt(ele.parents("tr").find(".qty").val());
-        //     var hiddenQuantity = parseInt(ele.parents("tr").find(".hidden-quantity").val());
-        //         if (quantity > hiddenQuantity) {
-        //         Swal.fire({
-        //             text: "Quantity cannot exceed available stock (" + hiddenQuantity + ").",
-        //             confirmButtonText: 'OK'
-        //         });
-        //         // $("#disabledSearch").prop("disabled", true);
-        //         return;
-        //     }
-
-        //     $.ajax({
-        //         url: '{{ route('update.cart') }}',
-        //         method: "patch",
-        //         data: {
-        //             _token: '{{ csrf_token() }}',
-        //             id: ele.parents("tr").attr("data-id"),
-        //             quantity: quantity
-        //         },
-        //         success: function (data) {
-        //             $('.cart-items').load(location.href + " .cart-items");
-        //         },
-
-        //         error: function (xhr) {
-                
-        //             alert('An error occurred: ' + xhr.responseText);
-        //         }
-
-        //     });
-        // });
             $(document).on('change', '.update-cart', function (e) {
             e.preventDefault();
             var ele = $(this);
@@ -220,6 +188,7 @@
         });
     });
 </script>
+
 @endsection
 
 @section('title')

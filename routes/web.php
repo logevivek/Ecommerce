@@ -16,6 +16,7 @@ use App\Http\Controllers\Admin\WebsiteController;
 use App\Http\Controllers\User\HomePageController;
 use App\Http\Controllers\User\ShopPageController;
 use App\Http\Controllers\Admin\CategoryController;
+use App\Http\Controllers\Admin\CouponController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\User\BlogsController;
 use App\Http\Controllers\User\CheckoutCantroller;
@@ -103,24 +104,36 @@ use App\Http\Controllers\User\CheckoutCantroller;
 
         // Blog Route
         Route::get('blogs',[BlogController::class,'ShowBlogs']);
-        Route::get('addblogs',[BlogController::class,'createBanner']);
+        Route::get('addblogs',[BlogController::class,'createBlogs']);
         Route::post('storeblogs',[BlogController::class,'storeBlogs']);
         Route::get('editbolgs',[BlogController::class,'editBlogs']);
         Route::post('updateblogs',[BlogController::class,'updateBlogs']);
         Route::get('deleteblogs', [BlogController::class, 'deleteBlogs']);
+
+        // Route Coupon Code
+        Route::get('coupons',[CouponController::class,'ShowCoupons']);
+        Route::get('addcoupons',[CouponController::class, 'createCoupons']);
+        Route::post('storecoupons',[CouponController::class,'storeCoupons']);
+        Route::get('editCoupons',[CouponController::class,'editCoupons']);
+
+        Route::post('updatecoupons',[CouponController::class, 'updateCoupons']);
+        Route::get('changeCoupanStatus', [CouponController::class, 'changeCoupanStatus']);
+        Route::get('deletecoupons', [CouponController::class, 'deleteCoupons']);
+
+
     
  });
 
 
     /////////////////////////////////////////////////////////// Frontend Route For page///////////////////////////////////////////////////////////////
 
-    Route::get('index',[HomePageController::class,'ShowHomePage']);
-    Route::get('shop',[ShopPageController:: class,'ShowShopPage']);
+    Route::get('index',[HomePageController::class,'ShowHomePage'])->name('index');
+    Route::get('shop',[ShopPageController:: class,'ShowShopPage'])->name('shop');
     
     // Pages Route
-    Route::get('contact',[HomePageController::class,'ContactPage']);
+    Route::get('contact',[HomePageController::class,'ContactPage'])->name('contact');
     Route::post('contact',[HomePageController::class,'store'])->name('contact.us.store');
-    Route::get('about',[HomePageController::class,'AboutPage']);
+    Route::get('about',[HomePageController::class,'AboutPage'])->name('about');
     Route::get('privacy',[HomePageController::class,'PrivacyPage']);
     Route::get('term',[HomePageController::class,'TermPage']);
     Route::get('prodetailspage/{id}',[HomePageController::class,'ProductDetailsPage']);
@@ -144,8 +157,16 @@ use App\Http\Controllers\User\CheckoutCantroller;
     Route::get('checkout',[HomePageController::class,'ShowCheckoutPage']);
     Route::post('storecheckout',[CheckoutCantroller::class,'StoreCheckoutData']);
 
+    // Coupon Code Route
+    Route::post('applyCoupons',[CheckoutCantroller::class,'applyCouponCode']);
+
+    // Remove Coupon Code
+    Route::post('remove_couponcode',[CheckoutCantroller::class,'RemoveCouponCode']);
+
+
+
     // Blogs Route
-    Route::get('blog',[BlogsController::class,'BlogsPage']);
+    Route::get('blog',[BlogsController::class,'BlogsPage'])->name('blog');
     Route::get('blogdetailspage/{id}',[BlogsController::class,'BlogDetailsPage']);
 
 

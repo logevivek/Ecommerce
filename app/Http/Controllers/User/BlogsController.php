@@ -13,9 +13,7 @@ class BlogsController extends Controller
     public function BlogsPage() {
         $category_data = Category::get();
         $web_data=Website::get();
-
         $blogs_data = Blog::orderBy('id','desc')->simplePaginate(4);
-
         $meta_data=Page::where('meta_title','Blog Page')->first();
         return view('front.blogs', compact('category_data' ,'web_data','blogs_data','meta_data'));
         

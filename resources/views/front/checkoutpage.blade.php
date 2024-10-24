@@ -1,4 +1,5 @@
 
+
 @extends('front.layout.app_other')  
 @section ('content')
     <!-- Breadcrumb Section Begin -->
@@ -18,8 +19,6 @@
         </div>
     </section>
     <!-- Breadcrumb Section End -->
-
-
     <style>
         .nice-select {
             -webkit-tap-highlight-color: transparent;
@@ -50,6 +49,21 @@
             white-space: nowrap;
             width: auto;
         }
+
+    a {
+        font-size: 14px;
+        color: red;
+        margin: 15px;
+    }
+
+    .checkout__order__total {
+    font-size: 15px !important;
+    font-weight: 700 !important;
+    padding-bottom: -2px !important;
+
+    }
+
+    
 
     </style>
     <!-- Checkout Section Begin -->
@@ -127,14 +141,24 @@
                         <div class="col-lg-4 col-md-6">
                             <div class="checkout__order">
                                 <h4>Payment Mode</h4>
-                                <select name="pay_mode"  class="form-control">
+                                <select name="pay_mode" class="form-control">
                                     <option value="COD" selected>COD</option>
                                     <option value="UPI">UPI</option>
                                     <option value="NET BANKING">NET BANKING</option>                   
                                 </select>
-                            </div>
-                            <hr>
+                            </div>&nbsp;
+                      
 
+                            <div class="checkout__order apply_coupon_code_box">
+                                <h4>Discount Coupon</h4> 
+                                @csrf
+                               
+                                <input type="text" placeholder="Enter your coupon code" name="coupon_name" id="coupon_name"  class="form-control" autocomplete="off">
+                                <div id="coupon_name_msg" style="color:red"></div>
+
+                                <button type="button" class="site-btn" id="disable_btn" onclick="applyCouponCode()">APPLY COUPON</button>
+                            </div>&nbsp;
+                  
                             <div class="checkout__order">
                                 <h4>Order Details</h4>
                                 <div class="checkout__order__products">Products/Quantity <span>Total</span></div>
@@ -147,7 +171,17 @@
                                     @endforeach
                                     @endif
                                 </ul>
-                                <div class="checkout__order__total">Grand Total <span> &#8377; {{ $total }} /- </span></div>
+                                <div class="checkout__order__total">Total Amount <span id="total_price"> &#8377; {{ $total }} /- </span></div>
+
+                                <div class="checkout__order__total" id="remove_coupan_discount">Coupon Discount <a href="javascript:void(0)" title="Remove coupon discount" onclick="remove_coupon_discount()">Remove</a><span id="discount_value"> &#8377; 0/-</span></div>
+
+                                <div class="checkout__order__total" id="remove_grand_total">Grand Total <span id="lessdiscountGrandTotal"> &#8377; {{ $total }} /- </span></div>
+                                {{-- send hidden input value --}}
+                                <input type="hidden" name="total_amount"  value="{{ $total }}">
+                                <input type="hidden" id="coupon_discount" name="coupon_discount" value="0">
+                                <input type="hidden" id="grand_total" name="grand_total" value="0">
+                                {{-- send hidden input value --}}
+
                                 <button type="submit" class="site-btn">PLACE ORDER</button>
                             </div>
                         </div>
@@ -156,11 +190,101 @@
             </div>
         </div>
     </section>
-    <!-- Checkout Section End -->
- @endsection
 
+   {{-- alertify --}}
+    <script src="https://cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/alertify.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/alertifyjs@1.14.0/build/css/alertify.min.css" rel="stylesheet">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+
+    <script>
+    // By default remove button hide 
+    $(document).ready(function(){
+        jQuery('#remove_coupan_discount').hide();
+      });
+    </script>
+
+<script>
+    function applyCouponCode(){
+        //alert('hello');
+        jQuery('#coupon_name_msg').html('');
+        var coupon_name=jQuery('#coupon_name').val();
+      
+        if(coupon_name!='')
+        {
+            jQuery.ajax({
+                type:'post',
+                url:'/applyCoupons',
+                data:'coupon_name=' +coupon_name+'&_token='+jQuery("[name='_token']").val(),
+                success:function(response)
+                {
+                    //console.log(response);
+                if (response.status === 'error') {
+                alertify.set('notifier', 'position', 'top-right');
+                alertify.error(response.msg); 
+                }
+                if(response.status == 'success')
+                    {
+                        jQuery('#remove_coupan_discount').show();
+                        var discount_value=response.discount_value;
+                        var lessdiscountGrandTotal=response.lessdiscountGrandTotal;
+
+                        jQuery('#discount_value').text(discount_value)
+                        jQuery('#lessdiscountGrandTotal').text(lessdiscountGrandTotal)
+
+                    //send hidden fields value code
+                        jQuery('#coupon_discount').val(discount_value);
+                        jQuery('#grand_total').val(lessdiscountGrandTotal);
+
+                        alertify.set('notifier','position','top-right');
+                        alertify.success(response.msg);
+
+                    // After submit hide coupon discount button 
+                        jQuery('.apply_coupon_code_box').hide();
+                    }
+                }   
+            });
+        }
+        else
+        {
+            jQuery('#coupon_name_msg').html('Please enter valid coupon code');
+
+        } 
+    }
+
+    // Remove Discount Coupon Code Button
+        function remove_coupon_discount(){
+        var coupon_name=jQuery('#coupon_name').val();
+        jQuery('#coupon_name').val('');
+        //alert(coupon_name);
+        if(coupon_name!='')
+            {
+                jQuery.ajax({
+                    type:'post',
+                    url:'remove_couponcode',
+                    data:'coupon_name=' +coupon_name+'&_token='+jQuery("[name='_token']").val(),
+                    success:function(response)
+                    {
+                        console.log(response);
+                        if(response.status == 'success')
+                        {
+                        // hide old coupon discount value
+                            jQuery('#remove_coupan_discount').hide();
+                            jQuery('#remove_grand_total').hide();
+                            jQuery('#total_price').text(response.total_cardvalue);
+
+                            alertify.set('notifier','position','top-right');
+                            alertify.success(response.msg);
+                            // show coupon code box
+                            jQuery('.apply_coupon_code_box').show();  
+                        }
+                    }  
+              });
+           }
+        }
+    </script>
+<!-- Checkout Section End -->
+ @endsection
  
-@section('title')
-Checkout Page
-@endsection
 

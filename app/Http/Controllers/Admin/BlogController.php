@@ -19,7 +19,7 @@ class BlogController extends Controller
 
     }
 
-    public function createBanner(){
+    public function createBlogs(){
 
         return view('/backend.addblogs');
     }

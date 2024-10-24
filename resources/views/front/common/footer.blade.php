@@ -19,12 +19,11 @@
                 <div class="footer__widget">
                     <h6>Useful Links</h6>
                     <ul>
-                        <li><a href="index">Home</a></li>
-                        <li><a href="about">About Us</a></li>
-                        <li><a href="contact">Contact Us</a></li>
-                        <li><a href="shop">Shop</a></li>
-                        <li><a href="privacy">Privacy Policy</a></li>
-                        <li><a href="term">Terms & Conditions</a></li>
+                        <li class="{{ request()->is('index') ? 'active' : '' }}"><a href="{{ route('index') }}">Home</a></li>
+                        <li class="{{ request()->is('shop') ? 'active' : '' }}"><a href="{{ route('shop') }}">Shop</a></li>
+                        <li class="{{ request()->is('blog') ? 'active' : '' }}"><a href="{{ route('blog') }}">Blog</a></li>
+                        <li class="{{ request()->is('about') ? 'active' : '' }}"><a href="{{ route('about') }}">About</a></li>
+                        <li class="{{ request()->is('contact') ? 'active' : '' }}"><a href="{{ route('contact') }}">Contact</a></li>
                         
                     </ul>
                 </div>
@@ -47,7 +46,7 @@
         <div class="row">
             <div class="col-lg-12">
                 <div class="footer__copyright">
-                    <div class="footer__copyright__text"><p>  <strong>Copyright © 2021 <a href="#">Logelite Pvt. Ltd.</a>.</strong>
+                    <div class="footer__copyright__text"><p>  <strong>Copyright © 2021 <a href="#">Logelite Pvt. Ltd</a></strong>
                         All rights reserved.</p></div>
                     <div class="footer__copyright__payment"><img src="{{ asset('front/assets/img/payment-item.png') }}" alt=""></div>
                 </div>

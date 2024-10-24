@@ -26,14 +26,14 @@
                         <div class="col-12">
                           <div class="card">
                             <div class="card-header">
-                                   <h3 class="card-title">Total Product Order {{$TotalOrder}}</h3>
+                                   <h3 class="card-title">Total No. Of Orders {{$TotalOrder}}</h3>
                             </div>
                             <!-- /.card-header -->
                             <div class="card-body">
 
                               <table id="example1" class="table table-bordered table-striped">
                                 <thead style="background-color:#007bff">
-                            <tr class="text-center" style="color:aliceblue">
+                                <tr class="text-center" style="color:aliceblue">
                                 <th>Sr No</th>
                                   <th>Order Id</th>
                                   <th>Customer Id</th>
@@ -46,7 +46,7 @@
                                 </thead>
                                 <tbody>
                             @foreach ( $order as $values )
-                          <tr class="text-center">
+                                <tr class="text-center">
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{ $values->order_id}}</td>
                                 <td>{{ $values->customer_id}}</td>

@@ -37,7 +37,7 @@
                                         </div>
                                         <div class="blog__sidebar__recent__item__text">
                                             <h6>{{$resentblogs->heading}}</h6>
-                                            <span>{{$resentblogs->created_at}}</span>
+                                            <span>{{$resentblogs->created_at->format('Y-m-d')}}</span>
                                         </div>
                                     </a>
                                     @endforeach
@@ -50,8 +50,8 @@
                         <div class="blog__details__text">
                             <img src="{{asset('backend/images/'.$single_blogdata->blog_banner )}}" width="700px" alt="">
                             <h3>{{$single_blogdata->heading}}</h3>
-                        
-                            <p>{{$single_blogdata->blog_desc}}</p>
+                            <span>{{$single_blogdata->created_at->format('Y-m-d')}}</span>
+                            <p>{!! $single_blogdata->blog_desc !!}</p>
                         </div>
                         <div class="blog__details__content">
                             <div class="row">
@@ -96,7 +96,7 @@
                             </div>
                             <div class="blog__item__text">
                                 <ul>
-                                    <li><i class="fa fa-calendar-o"></i> {{$resentblogs->created_at}}</li>
+                                    <li><i class="fa fa-calendar-o"></i> {{$resentblogs->created_at->format('Y-m-d')}}</li>
                                  
                                 </ul>
                                 <h5><a href="#">{{$resentblogs->heading}}</a></h5>

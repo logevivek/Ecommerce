@@ -52,6 +52,10 @@
                     </div>
                 </div>
                 @endforeach
+                <div class="col-lg-12 text-center">
+                    {{  $cat_base_product->links() }}
+                  
+                </div>
             </div>
         </div>
     </section>

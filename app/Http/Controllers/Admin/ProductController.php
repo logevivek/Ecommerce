@@ -42,7 +42,7 @@ class ProductController extends Controller
        $request->validate([
         'pro_name' => 'required|regex:/([A-Za-z0-9 ])+/|string|unique:products|max:30',
         'pro_desc' => 'required',
-        'pro_price' => 'required|integer|min:0.01|max:999999.99',
+        'pro_price' => 'required|min:0.01|max:999999.99',
         'pro_quantity' => 'required|integer|min:1|max:100',
         'cat_id' => 'required|numeric',
         'pro_img' => 'required|mimes:jpeg,png,jpg|max:81920',
