@@ -16,7 +16,7 @@
                                 @foreach ( $web_data as $values)
                                 <li><i class="fa fa-envelope"></i> {{$values->web_email}}</li>
                                 @endforeach
-                                <li>Free Shipping for all Order of &#8377; 99</li>
+                                <li>Free Shipping for all Order of &#8377; 1000 /-</li>
 
                             </ul>
                         </div>
@@ -39,18 +39,7 @@
                         <a href="index"><img src="{{asset('backend/images/'.$values->web_logo )}}" alt=""></a>
                     </div>
                 </div>
-                {{-- <div class="col-lg-6">
-                    <nav class="header__menu">
-                        <ul>
-                            <li class="active"><a href="index">Home</a></li>
-                            <li><a href="shop">Shop</a></li>
-                            <li><a href="blog">Blog</a></li>
-                            <li><a href="about">About</a></li>
-                            <li><a href="contact">Contact</a></li>
-                        </ul>
-                    </nav>
-                </div> --}}
-                
+
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>

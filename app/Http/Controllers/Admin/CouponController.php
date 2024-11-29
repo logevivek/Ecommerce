@@ -9,12 +9,10 @@ use Illuminate\Http\Request;
 class CouponController extends Controller
 
 {
+    
     public function ShowCoupons()
-
     {
-        $coupons_data= CouponCode::orderBy('id', 'desc')
-        ->where('trash',0)
-        ->get();
+        $coupons_data= CouponCode::orderBy('id', 'desc')->where('trash',0)->get();
         $TotalCoupons = count($coupons_data);
         return view('/backend.coupons', compact('coupons_data','TotalCoupons'));
     }
@@ -22,7 +20,6 @@ class CouponController extends Controller
     public function createCoupons()
     {
         return view('/backend.addcoupons');
-
     }
 
     public function storeCoupons(Request $request){
@@ -47,17 +44,17 @@ class CouponController extends Controller
 
     }
 
+
         public function editCoupons(Request $request){
 
             $id=$request->query('id');
             //dd($id);
-            $coupons = CouponCode::orderBy('id', 'desc')
-                ->where('coupon_codes.id',$id)
-                ->first();
-                return view('backend.editCoupons', compact('coupons'));
+            $coupons = CouponCode::orderBy('id', 'desc')->where('coupon_codes.id',$id)->first();
+            return view('backend.editCoupons', compact('coupons'));
         }
 
 
+        // Update Discount Coupon Code function
         public function updateCoupons( Request $request){
 
             $id = $request->query('id');
@@ -76,7 +73,7 @@ class CouponController extends Controller
 
         }
 
-
+   // Coupon status change function 
     public function changeCoupanStatus(Request $request)
     {
         //dd($request);
@@ -87,7 +84,7 @@ class CouponController extends Controller
     }
 
 
-
+  // Delete coupon function
     public function deleteCoupons(Request $request){
         $id=$request->query('id');
         $data=CouponCode::find($id);

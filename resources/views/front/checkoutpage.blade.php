@@ -50,8 +50,9 @@
             width: auto;
         }
 
+
     a {
-        font-size: 14px;
+        font-size: 18px;
         color: red;
         margin: 15px;
     }
@@ -173,7 +174,7 @@
                                 </ul>
                                 <div class="checkout__order__total">Total Amount <span id="total_price"> &#8377; {{ $total }} /- </span></div>
 
-                                <div class="checkout__order__total" id="remove_coupan_discount">Coupon Discount <a href="javascript:void(0)" title="Remove coupon discount" onclick="remove_coupon_discount()">Remove</a><span id="discount_value"> &#8377; 0/-</span></div>
+                                <div class="checkout__order__total" id="remove_coupan_discount">Coupon Discount <a href="javascript:void(0)" title="Remove coupon discount" onclick="remove_coupon_discount()"><i class="fa fa-trash" aria-hidden="true"></i></a><span id="discount_value"> &#8377; 0/-</span></div>
 
                                 <div class="checkout__order__total" id="remove_grand_total">Grand Total <span id="lessdiscountGrandTotal"> &#8377; {{ $total }} /- </span></div>
                                 {{-- send hidden input value --}}
@@ -283,6 +284,7 @@
               });
            }
         }
+
     </script>
 <!-- Checkout Section End -->
  @endsection

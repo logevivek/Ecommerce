@@ -43,6 +43,9 @@ use App\Http\Controllers\User\CheckoutCantroller;
             return view('backend.login');
         });
 
+
+
+
         // Category Route
         Route::get('/dashboard', [DashboardController::class, 'Dashboard']);
 
@@ -136,7 +139,7 @@ use App\Http\Controllers\User\CheckoutCantroller;
     Route::get('about',[HomePageController::class,'AboutPage'])->name('about');
     Route::get('privacy',[HomePageController::class,'PrivacyPage']);
     Route::get('term',[HomePageController::class,'TermPage']);
-    Route::get('prodetailspage/{id}',[HomePageController::class,'ProductDetailsPage']);
+    Route::get('prodetailspage/{id}',[HomePageController::class,'ProductDetailsPage'])->name('prodetailsPage');
 
     //Store Product Reviews
     Route::post('prodetailspage/storereview',[HomePageController::class,'StoreProReview']);

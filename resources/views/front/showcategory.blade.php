@@ -41,7 +41,6 @@
                 <div class="featured__item">
                         <div class="featured__item__pic set-bg" data-setbg="{{asset('backend/images/'.$catproducts->pro_img )}}">
                             <ul class="featured__item__pic__hover">
-                            
                                 <li><a href="{{ route('add.to.cart', $catproducts->id) }}"><i class="fa fa-shopping-cart"></i></a></li>
                             </ul>
                         </div>

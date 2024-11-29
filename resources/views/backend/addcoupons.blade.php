@@ -38,7 +38,7 @@
                                 </div>
 
                                 <div class="col-md-4">
-                                    <label>Discount (In Percents %) <span style="color: red;">*</span></label>
+                                    <label>Discount ( In Percent % ) <span style="color: red;">*</span></label>
                                     <input type="text" name="discount" id="discount" class="form-control" value="{{ old ('discount') }}" autocomplete="off">
                                     @error('discount') <span class="text-danger">{{ $message }}</span> @enderror
                                 </div>
