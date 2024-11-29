@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 class BannerController extends Controller
 {
     public function ShowBanner(){
+
+        // this banner for git update code testing
         $banner_data = Banner::orderBy('id', 'desc')->get();
         //dd($banner_data);
         $totalBanner=count($banner_data);
