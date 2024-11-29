@@ -10,10 +10,7 @@ use App\Models\Category;
 class CategoryController extends Controller
 {
     public function ProductCategory(){
-    // This is testing for git update
-        $categories = Category::orderBy('id', 'desc')
-        ->where('trash',0)
-        ->get();
+        $categories = Category::orderBy('id', 'desc')->where('trash',0)->get();
         $TotalCategory = count($categories);
         return view('/backend.category', compact('categories','TotalCategory'));
     }
@@ -21,20 +18,18 @@ class CategoryController extends Controller
     public function createCategory()
     {
         $data = Category::get();
-          //dd($data);
-          return view('/backend.addcategory', compact('data'));
+        return view('/backend.addcategory', compact('data'));
     }
 
     public function storeCategory(Request $request)
 
     {
-        // Decode tags data
+    // Decode tags data
      if( $jsonString=$request->tags){
         $array = json_decode($jsonString, true);
         $tags_values = array_column($array, 'value');
         $tags_data = implode(", ", $tags_values);
         }
-        //dd($tags_data); 
         $request->validate([
             'name' => 'required|string|unique:category|max:100',
             'description'=> 'required',
@@ -54,9 +49,6 @@ class CategoryController extends Controller
             'focus_keyword.required'=>'Please enter focus keyword',
             'tags.required'=>'Please add tags name',  
         ]);
-
-
-        // $input = $request->all();
         if ($image = $request->file('cat_img'))
          {
             $destinationPath = 'backend/images/';
@@ -80,34 +72,28 @@ class CategoryController extends Controller
        
     }
 
-    public function changeStatus(Request $request)
-    {
-        //dd($request);
-        $cat_status = Category::find($request->category_id);
-        $cat_status->status = $request->status;
-        $cat_status->save();
-  
-        return response()->json(['success'=>'Status change successfully.']);
-    }
+        public function changeStatus(Request $request)
+        {
+            //dd($request);
+            $cat_status = Category::find($request->category_id);
+            $cat_status->status = $request->status;
+            $cat_status->save();
+    
+            return response()->json(['success'=>'Status change successfully.']);
+        }
 
 
-    // Edit Category Details
+        // Edit Category Details
         public function editCategory($id)
         {
-    
-            // $id=$request->query('id');
-            $category = DB::table('category')
-            ->where('category.id',$id)
-            ->first();
+            $category = DB::table('category')->where('category.id',$id) ->first();
             return view('backend.editcategory' , ['category' => $category]);
-
          }
 
 
         public function updateCategory(Request $request)
         {
             $id = $request->id;
-           // dd($id);
             // Validate the request data
             $request->validate([
                 'name' => 'required|string|max:100',
@@ -158,12 +144,11 @@ class CategoryController extends Controller
             if ($data) 
             {
                 $cat_imgPath = 'backend/images/'.$data->cat_img;
-                // Delete the image file if it exists
+                // Delete the image file from images folder also if it exists
                 if (file_exists($cat_imgPath)) 
                 {
                     unlink($cat_imgPath);
                 }
-        
             }
             $data->trash = 1;
             $data->update();

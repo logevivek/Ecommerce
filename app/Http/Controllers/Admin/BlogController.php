@@ -10,24 +10,19 @@ use App\Http\Controllers\Controller;
 class BlogController extends Controller
 {
     public function ShowBlogs(){
-        // vbsdmbhfsj
-        $blogs_data= Blog::orderBy('id', 'desc')
-        ->where('trash',0)
-        ->get();
+
+        $blogs_data= Blog::orderBy('id', 'desc')->where('trash',0)->get();
         $TotalBlogs = count($blogs_data);
         return view('/backend.blogs', compact('blogs_data','TotalBlogs'));
 
     }
 
     public function createBlogs(){
-
         return view('/backend.addblogs');
     }
 
     public function storeBlogs(Request $request)
-
     {
-
         $jsonString=$request->tags;
         $array = json_decode($jsonString, true);
         $tags_values = array_column($array, 'value');
@@ -83,10 +78,7 @@ class BlogController extends Controller
     public function editBlogs(Request $request){
         //dd($request);
         $id=$request->query('id');
-        $blogs = DB::table('blogs')
-        ->where('blogs.id',$id)
-        ->first();
-
+        $blogs = DB::table('blogs')->where('blogs.id',$id)->first();
         return view('backend.editblogs' , compact('blogs'));
     }
 

@@ -155,7 +155,6 @@ class CheckoutCantroller extends Controller
                 ->update(['pro_quantity' => $RemainingQty]);
         }
 
-
         $request->validate([
 
             'first_name' => 'required',
@@ -197,7 +196,7 @@ class CheckoutCantroller extends Controller
 
         ]);
 
-        // Remove All Session Here..
+        // Remove All Session Here After order placed
         Session::flush();
         return redirect('index')->with('success', 'Your order has been placed successfully!');
     }

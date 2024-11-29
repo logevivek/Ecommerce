@@ -11,8 +11,6 @@ use Illuminate\Support\Facades\Redirect;
 
 class LoginController extends Controller
 {
-
-
     public function showRegister(){
         return view('backend.register');
     }

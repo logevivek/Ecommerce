@@ -166,8 +166,6 @@ use App\Http\Controllers\User\CheckoutCantroller;
     // Remove Coupon Code
     Route::post('remove_couponcode',[CheckoutCantroller::class,'RemoveCouponCode']);
 
-
-
     // Blogs Route
     Route::get('blog',[BlogsController::class,'BlogsPage'])->name('blog');
     Route::get('blogdetailspage/{id}',[BlogsController::class,'BlogDetailsPage']);
